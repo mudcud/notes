@@ -1,0 +1,425 @@
+Cyber Security is the body of technologies, processes, and practices designed to protect networks, devices, programs, and data from attack, theft, damage, modification or unauthorized access.
+    TYpes of cyber security: Network security,(securing comp network),application,data, cloud,mobile, end-point(securing individual devices)
+
+
+    OSI Model (Open Systems Interconnection. )
+
+        1.Physical Layer =  postal workers and the vehicles that transport your letter
+        actual physical connection between the device
+
+        Functions of the Physical Layer
+
+        Bit synchronization: The physical layer provides the synchronization of the bits by providing a clock. This clock controls both sender and receiver thus providing synchronization at the bit level.
+        Bit rate control: The Physical layer also defines the transmission rate i.e. the number of bits sent per second.
+        Physical topologies: Physical layer specifies how the different, devices/nodes are arranged in a network i.e. bus, star, or mesh topology.
+        Transmission mode: Physical layer also defines how the data flows between the two connected devices. The various transmission modes possible are Simplex, half-duplex and full-duplex.
+
+        2. Data Link Layer = Envelope that holds your letter. It makes sure the letter is delivered to the correct mailbox and checks for any damage to the envelope
+        node-to-node delivery of the message.Make sure data transfer is error-free from one node to another over the [physical layer]
+        When a packet arrives in a network, the DLL transmit it to the Host using its MAC address. 
+
+
+        The packet received from the Network layer is further divided into frames depending on the frame size of the NIC(Network Interface Card). 
+
+        The Data Link Layer is divided into two sublayers:  
+            Logical Link Control (LLC)
+            Media Access Control (MAC)
+
+        The Receiver’s MAC address is obtained by placing an ARP(Address Resolution Protocol) request onto the wire asking “Who has that IP address?”
+        and the destination host will reply with its MAC address. 
+        
+        Functions of the Data Link Layer
+
+        Framing: provides a way for a sender to transmit a set of bits that are meaningful to the receiver. This can be accomplished by attaching special bit patterns to the beginning and end of the frame.
+        Physical addressing: After creating frames, the Data link layer adds physical addresses (MAC addresses) of the sender and/or receiver in the header of each frame.
+        Error control: The data link layer provides the mechanism of error control in which it detects and retransmits damaged or lost frames.
+        Flow Control: The data rate must be constant on both sides else the data may get corrupted thus, flow control coordinates the amount of data that can be sent before receiving an acknowledgment.
+        Access control: When a single communication channel is shared by multiple devices, the MAC sub-layer of the data link layer helps to determine which device has control over the channel at a given time. 
+
+        Data Link layer is handled by the NIC (Network Interface Card) and device drivers of host machines. 
+        Switch & Bridge are Data Link Layer devices.
+
+        3. Network  = postal service's system for sorting and routing your letter.  finding the best path for the letter to reach its destination.
+    
+        The network layer works for the transmission of data from one host to the other located in different networks. 
+
+        Functions of the Network Layer 
+        Routing: The network layer protocols determine which route is suitable from source to destination
+        Logical Addressing: To identify each device on Internetwork uniquely, the network layer defines an addressing scheme. The sender & receiver’s IP addresses are placed in the header by the network layer.
+
+        Network layer is implemented by networking devices such as routers and switches.  
+
+        4.  Transport Layer = letter is delivered reliably  to your friend
+    The transport layer provides services to the application layer and takes services from the network layer. The data in the transport layer is referred to as Segments
+    It is responsible for the End to End Delivery of the complete message
+    Note: The sender needs to know the port number associated with the receiver’s application. 
+    For example, when a web application requests a web server, it typically uses port number 80, because this is the default port assigned to web application
+
+    Functions of the Transport Layer 
+        Segmentation and Reassembly: This layer accepts the message from the (session) layer, and breaks the message into smaller units. Each of the segments produced has a header associated with it.
+        Service Point Addressing: To deliver the message to the correct process, the transport layer header includes a type of address called service point address or port address. Thus by specifying this address, the transport layer makes sure that the message is delivered to the correct process.
+
+        Services Provided by Transport Layer 
+            Connection-Oriented Service
+        
+
+            Connection-Oriented Service: It is a three-phase process that includes
+
+            Connection Establishment
+            Data Transfer
+            Termination/disconnection
+
+            Connectionless Service
+            Data Transfer.  the receiver does not acknowledge receipt of a packet. This approach allows for much faster communication between devices.
+
+                NB
+                Data in the Transport Layer is called Segments. 
+                Transport layer is operated by the Operating System. It is a part of the OS and communicates with the Application Layer by making system calls. 
+                The transport layer is called as Heart of the OSI model. 
+                Device or Protocol Use : TCP, UDP  NetBIOS, PPTP
+
+
+        5. Session Layer  like establishing a time and place for you and your friend to meet sets up the meeting, maintains it and then ends it when you're done.
+
+        responsible for the establishment of connection, maintenance of sessions, and authentication, and also ensures security.
+        Synchronization:  help to identify the error so that the data is re-synchronized properly, and ends of the messages are not cut prematurely and data loss is avoided.
+        Device or Protocol Use :  NetBIOS, PPTP.
+
+        6. Presentation Layer/Translation layer  = Translating your letter into a language your friend understands best or encoding a secret message. T
+
+        The data from the application layer is extracted here and manipulated as per the required format to transmit over the network. 
+        Functions of the Presentation Layer
+        Translation: For example, ASCII to EBCDIC.
+        Encryption/ Decryption: Data encryption translates the data into another form or code
+        Compression: Reduces the number of bits that need to be transmitted on the network.
+
+        Device or Protocol Use :  JPEG, MPEG, GIF
+
+        7. Application Layer = This is you, writing the letter, 
+
+        These applications produce the data, which has to be transferred over the network.
+        Example: Application – Browsers, Skype Messenger, 
+        Device or Protocol Use :  SMTP
+
+    Note: OSI model acts as a reference model and is not implemented on the Internet because of its late invention. 
+    The current model being used is the TCP/IP model. which uses only 4 layers
+    IP finds the destination of the mail and TCP Transmission Control Protocol has the work to send and receive the mail. 
+    UDP User Datagram Protocol does not require IP to communicate with another computer. IP is required by only TCP
+        common internet proctocol. HTTP takes care of Web Browsers and Websites.FTP takes care of how the file is to be sent over the Internet,SMTP send and receive data.
+
+        
+
+    OSI Security Architecture
+    It defines security services and security mechanisms that can be used at each of the seven layers of the OSI model to provide security for data transmitted 
+
+    OSI Security Architecture focuses on these concepts:
+
+        Security Attack : Passive ie Traffic analysis,release of message content & Active attacks ie DoS,Replay, Modification of message,Masquerade, Repudiation
+            Masqquerade:  Website,IP,Email.fake website that appears to be legitimate. email that appears to be from a trusted source ie bank 
+            Repudiation:  Attacker make financial transaction, and then later denies having made it.
+        Security mechanism: A means of protecting a network, or device against unauthorized access. ie encryption, routing control use secure routes for specif data, 
+            Digital signature(use of cryptographic techniques to create a unique identifier),
+            Trafic padding(add extra data to a network traffic stream make diff to analyze)
+        Security Service: Data integrity, authentication, access control, data confidentialuty, Non repudiation (repudiation : Attacker attempts to deny or repudiate actions that they have taken, such as making a transaction or sending message)
+
+    X.509 is a digital certificate that is built on top of a widely trusted standard known as ITU or International Telecommunication Union X.509 standard, in which the format of PKI certificates is defined.
+    
+
+            Applications of X.509 Authentication Service Certificate:
+
+        Document signing and Digital signature
+        Web server security with the help of Transport Layer Security (TLS)/Secure Sockets Layer (SSL)  certificates
+        Email certificates
+        Code signing
+        Secure Shell Protocol (SSH) keys
+        Digital Identities
+
+
+    Public key infrastructure
+    PKI is the governing body behind issuing digital certificates. helps to protect data and gives unique identities to users and systems.ensures security in communications.
+    Uses a pair of keys: the public key and the private key to achieve security. 
+
+    PKI infrastructure components
+        A digital certificate also called a public key certificate
+        Private Key tokens
+        Registration authority
+        Certification authority
+        CMS or Certification management system
+
+    How do we know the public key belongs to the right person?,Issue is resolved by a PKI using digital certificates. It gives identities to keys in order to make the verification of owners accurate
+
+    Public Key Certificate or Digital Certificate: Digital certificates are issued to people and electronic systems to uniquely identify them in the digital world
+    Digital certificates are also called X.509 certificate
+        Classes of Digital certification. Class 1,2,3,4
+
+    Certifying Authorities: A CA issues and verifies certificates
+
+    SSL certificate
+        An SSL certificate is a Digital certificate that can be used for authentication of a website, and it creates a secure connection between client and web serve
+        enables the encryption of data which is then sent to the server-side
+        The web server with a private key can understand the data
+
+            SSL – Secure Socket Layer. Contains: domain name,subdomains, issue data, expiration date, SSL/TLS version,CA information,public key,cert signature algorthm
+            TLS – Transport Layer Security
+
+            certificate is installed on the server then the data traffic will be encrypted and secure
+
+            What is a digital signature?
+                    A digital signature is a mathematical technique used to validate the authenticity and integrity of a message, software, or digital document. 
+                    digital signature is a way of authenticating a digital data coming from a trusted source
+
+                What is a digital certificate?
+                    Digital certificate is issued by a trusted third party which proves sender’s identity to the receiver and receiver’s identity to the sender. 
+     
+
+    Social Engineering Attacks
+        Phishing scams are the most common type
+        Tools such as SET(Social Engineering Toolkit) create a phishing page
+
+    Cross Site Request Forgery (CSRF)
+        Browsers submit cookies to a website whenever a request is made to that website without checking the “origin” of the request. This is where CSRF comes into picture. The attacker places some code on his website that makes a genuine looking request to the target website
+
+    Emerging Attack Vectors 
+
+        Directory Brute Forcing
+            developers forget to make sensitive files and directories hidden.by brute forcing the directories, the attack may find the hidden data of web application. 
+
+        Relative Path Overwrite 
+            if we visit https://example.com/index.html ,website can import its CSS file thru given path, but if attacker changes URL to https://example.com /index.htm/random/payload.it will also work due to the flexible nature of server-side programming languages and web frameworks, by adding the payloads at vulnerable end point, attacker can control the CSS of web application.
+
+        Insecure Direct Object Reference 
+            permission based vulnerability which allows an attacker to modify or access resources belonging to other users of the application. 
+
+    Proxy Server
+
+    A proxy server is a server that acts as an intermediary between the request made by clients, and a particular server for some services or requests for some resources
+        Proxy servers is to protect the direct connection of Internet clients and Internet resources
+        prevents the identification of the client’s IP address (It makes the original IP address of the node remain hidden while accessing data from that server.)
+        Protects true host identity: must be configured to a specific application such as HTTP or FTP.
+
+    Types of Proxy server
+        Reverse Proxy Server:  listen to the request made by the client and redirect to the particular web server 
+        Web Proxy Server: Web Proxy forwards the HTTP requests, only URL is passed instead of a path
+        CGI Proxy: CGI proxy server developed to make the websites more accessible.
+        Transparent ,Tor/onion, Rotating  etc
+    A proxy can change your IP address So, the webserver will be unable to fetch your location in the world. It protects data from getting hacked 
+
+
+
+    Packet : When data sent ,it is broken down into smaller, manageable pieces called "packets
+        Parts of a Packet: Header and Payload
+        The header is like the envelope or packaging of a letter.Has Source Address: ,destination,protocol type
+        The payload is the actual data or content being sent.could be a piece of an email, a segment of a video, part of a web page
+
+    Malware is a broad term that refers to a variety of malicious programs.
+    Worm: A self-replicating program .ie  Wolovgate.F, sobig.D ,trile. C
+    Trojan Horse Malwaare: a code that is malicious in nature and has the capacity to take control of the computer. 
+    Allow the hackers to gain remote access of a target system.
+        infected by Trojans without realizing it is called a direct action Trojan. ie name Js. ExitW. It can be downloaded from many malicious sites.
+            The effect of the Js. ExitW is to make the computer fall into a never-ending loop of start and shutdown.Does not damage anything
+        ie trojan atacks. Rakhni Trojan,Tiny Banker, 
+        Zeus or Zbot, often known as Zbot, is a toolkit that allows hackers to create their own Trojan virus and targets financial services. To steal user passwords and financial information, the source code employs strategies like form grabbing and keystroke logging.
+
+
+    Cross Site Scripting (XSS) is a vulnerability in a web application that allows a third party to execute a script in the user’s browser on behalf of the web application.
+        consequences such as account compromise, account deletion, privilege escalation, malware infection 
+        types of XSS
+            Reflected XSS: If the input has to be provided each time to execute
+            Stored XSS: When the response containing the payload is stored on the server in a way that the script gets executed on every visit without submission of 
+            
+            Cross-Site Scripting (XSS): XSS allows the attackers to insert client-side script into web pages. E.g. Submission of forms. It is a term used to describe a class of attacks that allow an attacker to inject client-side scripts into other users’ browsers through a website. 
+
+
+    SQL Injection 
+        An attack that employs malicious SQL code to manipulate backend databases in order to obtain information 
+
+        Error-Based SQL Injections:
+            obtain information about the database structure from error messages issued by the database server.
+        Union-Based SQL Injections
+            use the UNION SQL operator to aggregate the results of two or more SELECT queries into a single result, which is then returned as part of the HTTP response.
+        Blind Boolean-based SQL Injections
+            Boolean-based SQL Injection works by submitting a SQL query to the database and forcing the application to produce a different response 
+        Blind Time-Based SQL Injections
+            works by sending a SQL query to the database and forcing it to wait for a predetermined length of time (in seconds) before answering
+
+    Buffer Overflow Attack
+        A buffer is a temporary area for data storage. When more data (than was originally allocated) gets placed by a program or system process, the extra data overflows.
+        It causes some of that data to leak out into other buffers, which can corrupt or overwrite whatever data they were holding.
+
+    Reverse Engineering 
+        a process of recovering the design, requirement specifications, and functions of a product from an analysis of its code.Tools bunch,cia,pbs
+
+            Goals
+                Detect side effects, Synthesis higher abstraction, Facilitate Reuse, Cope with Complexity, Recover lost information
+
+
+    A vulnerability is a defect in a system’s design that can be exploited
+    Exploit is a piece of software, a bit of data, or a series of commands that exploits a defect or vulnerability to perform unwanted or unauthorized actions
+                Types expolit
+                Zero-click: A zero-click attack is an exploit that does not involve any user engagement, such as key presses 
+                Pivoting: technique in which a compromised system is used to target other systems on the same network in order to circumvent restrictions such as firewall setups 
+
+        types of attacks 
+        DDoS (Distributed DoS) – DDoS is a type of DOS attack where multiple compromised systems, are used to target a single system causing a Denial of Service (DoS)
+        malware,virus,botnet,DoS,Packet sniffer,IP Spoofing,Man-in-the-Middle Attack,Phishing ,DNS Spoofing etc
+
+    Web servers are where websites are stored.
+                types of major Web Attacks:
+
+                Denial-of-Service (DoS) / Distributed Denial-of-service (DDoS)
+                Web Defacement Attack
+                SSH Brute Force Attack
+                Cross-site scripting (XSS)
+                Directory Traversal
+                DNS Server Hijacking
+                MITM Attack
+                HTTP Response Splitting Attack
+
+    Voice-over IP hacking is a type of attack carried out by the malicious user for the purpose of infiltrating the phone system or unauthorized access to the phone system in order to steal the data. This lets the malicious user listen to all the conversations and calls, steal critical information
+
+    Spoof SMS Message in Linux 
+        fake-sms // git clone https://github.com/machine1337/fake-sms
+        Social Engineering Toolkit (SET)  //sudo setoolkit
+
+    Secure Code Review is code assessment for identifying security vulnerabilities at an early stage in development lifecycle.i.e Review security-related HTTP headers 
+
+    penetration testing
+        simulated cyber attack on a computer system, network, or web application. The purpose of a penetration test is to identify vulnerabilities in the system 
+
+        Types
+
+        Black Box Penetration Testing:- Attacker does not know the target as it exactly simulates an actual cyber attack where an actual black hat hacker attacks.
+        Grey Box Penetration Testing:- attacker is provided with a bit more information about the target like network configurations
+        White Box Penetration Testing: attackers have developer-level knowledge about the system which also includes an assessment of source code, have full access to the system
+    Phases of Penetration Testing Process
+
+        8. planning phase
+        9. scanning
+            variety of tools to perform different types of scans i.e 
+                Port scans: which identify open ports on live hosts, and the services running on those ports.
+                Vulnerability scans: search for known vulnerabilities in the system based on the version and configuration of the software running on the open ports.
+                Network mapping: this creates a visual representation of the target network, including the hosts, devices, and services. S
+                
+        10. Gaining Access
+            1. Password cracking: 
+            2. Social engineering
+            3. Exploiting software vulnerabilities
+        11. Maintaining Access: being able to be continuously within the target environment to collect as much data as possible.
+            1. Establishing backdoors
+            2. Privilege escalation
+        12. Be hidden from the user
+        
+        Penetration tools Nmap a network exploration tool and security scanner. identify hosts and services on a network,
+                        Nessus a vulnerability scanner. To find vulnerabilities in systems and applications.
+                        wireshark a packet analyzer.Capture and analyze network traffic.
+                        burp suite ,  a web application security testing tool. Find security issues in web applications.
+
+    types of Vulnerability Assessments : Host Vulnerability Assessment i.e servers,database,network,application scan ie frontend & backend
+        Tools for Vulnerability Assessment
+
+            Simulation tools that test web applications.
+            Scanners that test network services and protocols.
+            Network scanners that identify malicious packets and defects in IP addresses.
+
+
+    Methods To Preserve a Digital Evidence
+
+        Chain of Custody refers to the logical sequence that records the sequence of custody, control, transfer, analysis and disposition of physical or electronic evidence in legal cases. Steps Data collection, Examination,Analysis,reporting
+
+        Drive Imaging
+        Hash values
+        when generating disk image, the process generates cryptographic hash values like MD5, SHA1, etc. Hash Values are critical as:
+
+            They verify the Authenticity and Integrity of the image as an exact replica of the original media
+            any modifications like creating a new file or editing, a new hash value is generated
+            Hash value and other file metadata are not visible in a normal file ,access this information using special software.
+
+            If the hash values of the image and the original evidence do not match, means it was tempered with
+
+    A framework is a pre-built software that we can use as a foundation for our project without having to start from scratch.
+
+        A cybersecurity framework is a set of rules common to all security leaders that they must abide by.
+        It is a set of standards and practices that organizations follow to reduce cybersecurity risks.
+
+        functions: identification,response,protection,recover & Detection
+
+        Components: Framework Core; set of strategies,Implementation Tiers(guidelines & policies), profiles: records unique to each org.
+        Commonly used frameworks NIST Cybersecurity Framework, ISO 27001, ISO 27002, SOC2 & HIPAA
+
+    Cipher
+    When plain text is encrypted it becomes unreadable and is known as ciphertext
+
+    Cryptanalysis is the process of transforming or decoding communications from non-readable to readable format without having access to the real key
+        Forms of Cryptanalysis : 
+           
+            Linear cryptanalysis is a general type of cryptanalysis based on discovering affine approximations to a cipher’s action in cryptography.
+            Differential cryptanalysis is a sort of cryptanalysis that may be used to decrypt both block and stream ciphers, as well as cryptographic hash functions.
+
+    RC4 is a symmetric stream cipher and variable key length algorithm.
+
+    A hash function is nothing but a mathematical function that can convert a numeric value into another numeric value that is compressed. 
+    Hash Function is a function that has a huge role in making a System Secure as it converts normal data given to it as an irregular value of fixed length.
+        hash function returns are called the message digest or hash values.
+
+        Converting Hash Codes to their original value is an impossible task to perform. This is the main difference between Encryption as Hash Function. 
+            This property makes hash functions useful for verifying the integrity of data.any changes to the data will result in a different hash value.
+
+         Features of hash functions 
+            One-way function
+            Deterministic: Hash functions are deterministic, meaning that given the same input, the output will always be the same
+            Fixed-size output
+            Collision resistance: difficult to find two different inputs that produce the same hash value
+            Non-reversible
+
+            DISD  MD5 hash function, which is vulnerable to collision attacks, rainbow table attack
+
+    
+    Authentication protocols
+        Kerberos is a protocol that aids in network authentication.for validating clients/servers during a network employing a cryptographic key
+       
+        LDAP Lightweight Directory Access Protocol. It is a protocol that is used for determining any individuals, organizations, and other devices duringa network regardless of being on public or corporate internet.
+       
+        OAuth2 as the name suggests it is an authorization framework that promotes granting limited access to the user on its account through an HTTP service
+       
+        SAML Security Assertion Markup Language which is based on XML-based authentication data format provides the authorization between an identity provider and service provider
+
+        RADIUS stands for Remote Authentication Dial-In User Service. It is a network protocol that provides sufficient centralized Authentication, Accounting,         
+
+    IP security (IPSec)
+    an Internet Engineering Task Force (IETF) standard suite of protocols between two communication points across the IP network that provide data authentication, integrity, and confidentiality.
+
+    
+    IPSec (IP Security) architecture uses two protocols to secure the traffic or data flow. These protocols are ESP (Encapsulation Security Payload) and AH (Authentication Header). 
+    advantages that Authentication Header provides,
+
+        Message Integrity 
+        Source Authentication 
+        
+        
+    Architecture: Confidentiality,Authenticity,Integrity
+
+    Componets IP Security
+
+    Encapsulating Security Payload (ESP)
+    Authentication Header (AH)
+    Internet Key Exchange (IKE)
+
+    Secure Socket Layer (SSL) 
+        provides security to the data that is transferred between web browser and server.
+
+        Secure Socket Layer Protocols: 
+            SSL record protocol: provides confidentiality & message integrity
+            Handshake protocol: used to establish sessions.
+                Phase-1: both Client and Server send packets to each other. In this IP session, cipher suite and protocol version are exchanged for security purposes. 
+                Phase-2: Server sends his certificate and Server-key-exchange. The server end phase-2 by sending the Server-hello-end packet. 
+                Phase-3: In this phase, Client replies to the server by sending his certificate and Client-exchange-key. 
+                Phase-4: In Phase-4 Change-cipher suite occurs and after this the Handshake Protocol ends. 
+            Change-cipher spec 
+                Unless Handshake Protocol is completed, the SSL record Output will be in a pending state
+                purpose is to cause the pending state to be copied into the current state. 
+                
+            Alert 
+                purpose is to cause the pending state to be copied into the current state. 
+    Transport Layer Security (TLS)
+         designed to provide security at the transport layer. 
+         TLS was derived from a security protocol called Secure Socket Layer (SSL)
