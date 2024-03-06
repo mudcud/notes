@@ -355,7 +355,8 @@ Cyber Security is the body of technologies, processes, and practices designed to
             Linear cryptanalysis is a general type of cryptanalysis based on discovering affine approximations to a cipher’s action in cryptography.
             Differential cryptanalysis is a sort of cryptanalysis that may be used to decrypt both block and stream ciphers, as well as cryptographic hash functions.
 
-    RC4 is a symmetric stream cipher and variable key length algorithm.
+    RC4 Rivest Cipher 4 is a symmetric stream cipher and variable key length algorithm.
+        It encrypts messages one byte at a time via an algorithm.
 
     A hash function is nothing but a mathematical function that can convert a numeric value into another numeric value that is compressed. 
     Hash Function is a function that has a huge role in making a System Secure as it converts normal data given to it as an irregular value of fixed length.
@@ -423,3 +424,90 @@ Cyber Security is the body of technologies, processes, and practices designed to
     Transport Layer Security (TLS)
          designed to provide security at the transport layer. 
          TLS was derived from a security protocol called Secure Socket Layer (SSL)
+
+
+      Methodology to follow
+        Reconnaissance
+        Scanning
+        Gaining : information gatheringcontrol
+        Maintaining Access
+        Log clearing  
+
+    1. Metasploit
+
+     Framework to write,test and execute exploit code
+
+        Components
+            Auxiliaries
+                Specific piece of code written to perfom a particular task.i.e, if a web server is vulnerable
+                auxiliary module include: Admin,Client,Spoof,Snipper etc
+            Payloads
+                Action need to be performed after completion of execution of an attack
+                metasploit has over 42 payloads which are categorised as: singles, stagers & stages
+            Exploits
+                a code that takes advantage of a software vulnerability or security flaw.one use this code on the target system to take advantage of the vulnerabilities present in the target system
+                there are of classified in 17 categories. i.e Aix,Unix,Network,Android etc
+            Encoders
+                Encoders use various algorithms and techniques to obscure the payload in a way that it doesn’t get detected by antivirus software.
+                We use encoders since it is possible that your payload gets detected by any of the security software present on the target system or antivirus
+                i.e cmd,php,x64,x86
+            Post-Exploitation Activities (Post)
+                 Use of the post modules to further infiltrate the target system. these  activities include
+                    Retrieving the system credentials
+                    Stealing cookies and saved credentials
+                    Capturing keystrokes on the target system
+                    Escalating user preivileges
+            Evasion
+                Allow user to generate a windows EXE that evades against microsoft windows defender
+                Techniques such as shellcode encryption, source code obfuscation, Metsam, and anti-emulation are used to achieve this.
+                To get best output, using payloads that uses more secure channels such as HTTPS, or RC4 in order to avoid the payload network traffic getting caught by antivirus better.
+
+            Nops, or No Operation instructions, are an important part of Metasploit, and are often used to create powerful exploits.
+
+
+                Application    =  Explot
+                Presentation   =  Phishing
+                Session        =  Hijacking
+                Transport      =   reconnaissance
+                Network        =  MITM
+                Data Link      =   Spoofing
+                Physical       =  Sniffing
+
+        Information gatherin
+            Nmap recon/scan networks. It is used to discover hosts, ports, and services
+            Zenmap GUI of Nmap
+            whois lookup  a database record of all the registered domains over the internet.check available domainnames,identify trademarks
+                could even track registrants with fraud domain,  identify and fix DNS or domain-related issues.
+            SPARTA is a python based Graphical User Interface tool. used to export Nmap outut to XML,
+                automate the process of Nikto tool to every HTTP service or any other service.
+                save the scan of the hosts you have scanned earlier in order to save time
+                reuse the password which is already found and is not present in the wordlist.
+            nslookup stands for nameserver lookup
+                used to get the information from the DNS server. It queries DNS to obtain a domain name, IP address mapping, or any other DNS record
+                    nslookup eno.com
+            Osintgram is an OSINT tool to run on reconnaissance Instagram to collect and analyze
+
+        DNS Footprinting
+            nslookup can be used
+
+            DNS Footprinting is a technique that is used by an attacker to gather DNS information about the target system. 
+                    gets information such as  domain name,comp names,ip addresses, other network relate activities
+
+                                 A	A record is an address mapping record, also known as a DNS host record.
+                                MX	The mail server record specifies an SMTP email server 
+                                NS	It specifies the authoritative Name Server.
+                                CNAME	Conical Name record, alias record used to alias a hostname to another hostname
+                                SOA	Start of Authority is the authoritative Name server for the current DNS zone.
+                                PTR	Pointer records, It allows a DNS resolver to provide an IP address and receive a hostname
+                                TXT	Text Record, It contains machine-readable data such as DKIM.
+                                HINFO	Host information record includes CPU type and OS
+                                SRV	Service Records
+
+                            ie. nslookup -type=mx kaiandkaro.com
+
+
+
+
+
+
+            
