@@ -1,0 +1,937 @@
+Cyber Security is the body of technologies, processes, and practices designed to protect networks, devices, programs, and data from attack, theft, damage, modification or unauthorized access.
+    TYpes of cyber security: Network security,(securing comp network),application,data, cloud,mobile, end-point(securing individual devices)
+
+
+    OSI Model (Open Systems Interconnection. )
+
+        1.Physical Layer =  postal workers and the vehicles that transport your letter
+        actual physical connection between the device
+
+        Functions of the Physical Layer
+
+        Bit synchronization: The physical layer provides the synchronization of the bits by providing a clock. This clock controls both sender and receiver thus providing synchronization at the bit level.
+        Bit rate control: The Physical layer also defines the transmission rate i.e. the number of bits sent per second.
+        Physical topologies: Physical layer specifies how the different, devices/nodes are arranged in a network i.e. bus, star, or mesh topology.
+        Transmission mode: Physical layer also defines how the data flows between the two connected devices. The various transmission modes possible are Simplex, half-duplex and full-duplex.
+
+        2. Data Link Layer = Envelope that holds your letter. It makes sure the letter is delivered to the correct mailbox and checks for any damage to the envelope
+        node-to-node delivery of the message.Make sure data transfer is error-free from one node to another over the [physical layer]
+        When a packet arrives in a network, the DLL transmit it to the Host using its MAC address. 
+
+
+        The packet received from the Network layer is further divided into frames depending on the frame size of the NIC(Network Interface Card). 
+
+        The Data Link Layer is divided into two sublayers:  
+            Logical Link Control (LLC)
+            Media Access Control (MAC)
+
+        The Receiver’s MAC address is obtained by placing an ARP(Address Resolution Protocol) request onto the wire asking “Who has that IP address?”
+        and the destination host will reply with its MAC address. 
+        
+        Functions of the Data Link Layer
+
+        Framing: provides a way for a sender to transmit a set of bits that are meaningful to the receiver. This can be accomplished by attaching special bit patterns to the beginning and end of the frame.
+        Physical addressing: After creating frames, the Data link layer adds physical addresses (MAC addresses) of the sender and/or receiver in the header of each frame.
+        Error control: The data link layer provides the mechanism of error control in which it detects and retransmits damaged or lost frames.
+        Flow Control: The data rate must be constant on both sides else the data may get corrupted thus, flow control coordinates the amount of data that can be sent before receiving an acknowledgment.
+        Access control: When a single communication channel is shared by multiple devices, the MAC sub-layer of the data link layer helps to determine which device has control over the channel at a given time. 
+
+        Data Link layer is handled by the NIC (Network Interface Card) and device drivers of host machines. 
+        Switch & Bridge are Data Link Layer devices.
+
+        3. Network  = postal service's system for sorting and routing your letter.  finding the best path for the letter to reach its destination.
+    
+        The network layer works for the transmission of data from one host to the other located in different networks. 
+
+        Functions of the Network Layer 
+        Routing: The network layer protocols determine which route is suitable from source to destination
+        Logical Addressing: To identify each device on Internetwork uniquely, the network layer defines an addressing scheme. The sender & receiver’s IP addresses are placed in the header by the network layer.
+
+        Network layer is implemented by networking devices such as routers and switches.  
+
+        4.  Transport Layer = letter is delivered reliably  to your friend
+    The transport layer provides services to the application layer and takes services from the network layer. The data in the transport layer is referred to as Segments
+    It is responsible for the End to End Delivery of the complete message
+    Note: The sender needs to know the port number associated with the receiver’s application. 
+    For example, when a web application requests a web server, it typically uses port number 80, because this is the default port assigned to web application
+
+    Functions of the Transport Layer 
+        Segmentation and Reassembly: This layer accepts the message from the (session) layer, and breaks the message into smaller units. Each of the segments produced has a header associated with it.
+        Service Point Addressing: To deliver the message to the correct process, the transport layer header includes a type of address called service point address or port address. Thus by specifying this address, the transport layer makes sure that the message is delivered to the correct process.
+
+        Services Provided by Transport Layer 
+            Connection-Oriented Service
+        
+
+            Connection-Oriented Service: It is a three-phase process that includes
+
+            Connection Establishment
+            Data Transfer
+            Termination/disconnection
+
+            Connectionless Service
+            Data Transfer.  the receiver does not acknowledge receipt of a packet. This approach allows for much faster communication between devices.
+
+                NB
+                Data in the Transport Layer is called Segments. 
+                Transport layer is operated by the Operating System. It is a part of the OS and communicates with the Application Layer by making system calls. 
+                The transport layer is called as Heart of the OSI model. 
+                Device or Protocol Use : TCP, UDP  NetBIOS, PPTP
+
+
+        5. Session Layer  like establishing a time and place for you and your friend to meet sets up the meeting, maintains it and then ends it when you're done.
+
+        responsible for the establishment of connection, maintenance of sessions, and authentication, and also ensures security.
+        Synchronization:  help to identify the error so that the data is re-synchronized properly, and ends of the messages are not cut prematurely and data loss is avoided.
+        Device or Protocol Use :  NetBIOS, PPTP.
+
+        6. Presentation Layer/Translation layer  = Translating your letter into a language your friend understands best or encoding a secret message. T
+
+        The data from the application layer is extracted here and manipulated as per the required format to transmit over the network. 
+        Functions of the Presentation Layer
+        Translation: For example, ASCII to EBCDIC.
+        Encryption/ Decryption: Data encryption translates the data into another form or code
+        Compression: Reduces the number of bits that need to be transmitted on the network.
+
+        Device or Protocol Use :  JPEG, MPEG, GIF
+
+        7. Application Layer = This is you, writing the letter, 
+
+        These applications produce the data, which has to be transferred over the network.
+        Example: Application – Browsers, Skype Messenger, 
+        Device or Protocol Use :  SMTP
+
+    Note: OSI model acts as a reference model and is not implemented on the Internet because of its late invention. 
+    The current model being used is the TCP/IP model. which uses only 4 layers
+    IP finds the destination of the mail and TCP Transmission Control Protocol has the work to send and receive the mail. 
+    UDP User Datagram Protocol does not require IP to communicate with another computer. IP is required by only TCP
+        common internet proctocol. HTTP takes care of Web Browsers and Websites.FTP takes care of how the file is to be sent over the Internet,SMTP send and receive data.
+
+        
+
+    OSI Security Architecture
+    It defines security services and security mechanisms that can be used at each of the seven layers of the OSI model to provide security for data transmitted 
+
+    OSI Security Architecture focuses on these concepts:
+
+        Security Attack : Passive ie Traffic analysis,release of message content & Active attacks ie DoS,Replay, Modification of message,Masquerade, Repudiation
+            Masqquerade:  Website,IP,Email.fake website that appears to be legitimate. email that appears to be from a trusted source ie bank 
+            Repudiation:  Attacker make financial transaction, and then later denies having made it.
+        Security mechanism: A means of protecting a network, or device against unauthorized access. ie encryption, routing control use secure routes for specif data, 
+            Digital signature(use of cryptographic techniques to create a unique identifier),
+            Trafic padding(add extra data to a network traffic stream make diff to analyze)
+        Security Service: Data integrity, authentication, access control, data confidentialuty, Non repudiation (repudiation : Attacker attempts to deny or repudiate actions that they have taken, such as making a transaction or sending message)
+
+    X.509 is a digital certificate that is built on top of a widely trusted standard known as ITU or International Telecommunication Union X.509 standard, in which the format of PKI certificates is defined.
+    
+
+            Applications of X.509 Authentication Service Certificate:
+
+        Document signing and Digital signature
+        Web server security with the help of Transport Layer Security (TLS)/Secure Sockets Layer (SSL)  certificates
+        Email certificates
+        Code signing
+        Secure Shell Protocol (SSH) keys
+        Digital Identities
+
+
+    Public key infrastructure
+    PKI is the governing body behind issuing digital certificates. helps to protect data and gives unique identities to users and systems.ensures security in communications.
+    Uses a pair of keys: the public key and the private key to achieve security. 
+
+    PKI infrastructure components
+        A digital certificate also called a public key certificate
+        Private Key tokens
+        Registration authority
+        Certification authority
+        CMS or Certification management system
+
+    How do we know the public key belongs to the right person?,Issue is resolved by a PKI using digital certificates. It gives identities to keys in order to make the verification of owners accurate
+
+    Public Key Certificate or Digital Certificate: Digital certificates are issued to people and electronic systems to uniquely identify them in the digital world
+    Digital certificates are also called X.509 certificate
+        Classes of Digital certification. Class 1,2,3,4
+
+    Certifying Authorities: A CA issues and verifies certificates
+
+    SSL certificate
+        An SSL certificate is a Digital certificate that can be used for authentication of a website, and it creates a secure connection between client and web serve
+        enables the encryption of data which is then sent to the server-side
+        The web server with a private key can understand the data
+
+            SSL – Secure Socket Layer. Contains: domain name,subdomains, issue data, expiration date, SSL/TLS version,CA information,public key,cert signature algorthm
+            TLS – Transport Layer Security
+
+            certificate is installed on the server then the data traffic will be encrypted and secure
+
+            What is a digital signature?
+                    A digital signature is a mathematical technique used to validate the authenticity and integrity of a message, software, or digital document. 
+                    digital signature is a way of authenticating a digital data coming from a trusted source
+
+                What is a digital certificate?
+                    Digital certificate is issued by a trusted third party which proves sender’s identity to the receiver and receiver’s identity to the sender. 
+     
+
+    Social Engineering Attacks
+        Phishing scams are the most common type
+        Tools such as SET(Social Engineering Toolkit) create a phishing page
+
+    Cross Site Request Forgery (CSRF)
+        Browsers submit cookies to a website whenever a request is made to that website without checking the “origin” of the request. This is where CSRF comes into picture. The attacker places some code on his website that makes a genuine looking request to the target website
+
+    Emerging Attack Vectors 
+
+        Directory Brute Forcing
+            developers forget to make sensitive files and directories hidden.by brute forcing the directories, the attack may find the hidden data of web application. 
+
+        Relative Path Overwrite 
+            if we visit https://example.com/index.html ,website can import its CSS file thru given path, but if attacker changes URL to https://example.com /index.htm/random/payload.it will also work due to the flexible nature of server-side programming languages and web frameworks, by adding the payloads at vulnerable end point, attacker can control the CSS of web application.
+
+        Insecure Direct Object Reference 
+            permission based vulnerability which allows an attacker to modify or access resources belonging to other users of the application. 
+
+    Proxy Server
+
+    A proxy server is a server that acts as an intermediary between the request made by clients, and a particular server for some services or requests for some resources
+        Proxy servers is to protect the direct connection of Internet clients and Internet resources
+        prevents the identification of the client’s IP address (It makes the original IP address of the node remain hidden while accessing data from that server.)
+        Protects true host identity: must be configured to a specific application such as HTTP or FTP.
+
+    Types of Proxy server
+        Reverse Proxy Server:  listen to the request made by the client and redirect to the particular web server 
+        Web Proxy Server: Web Proxy forwards the HTTP requests, only URL is passed instead of a path
+        CGI Proxy: CGI proxy server developed to make the websites more accessible.
+        Transparent ,Tor/onion, Rotating  etc
+    A proxy can change your IP address So, the webserver will be unable to fetch your location in the world. It protects data from getting hacked 
+
+
+
+    Packet : When data sent ,it is broken down into smaller, manageable pieces called "packets
+        Parts of a Packet: Header and Payload
+        The header is like the envelope or packaging of a letter.Has Source Address: ,destination,protocol type
+        The payload is the actual data or content being sent.could be a piece of an email, a segment of a video, part of a web page
+
+    Malware is a broad term that refers to a variety of malicious programs.
+    Worm: A self-replicating program .ie  Wolovgate.F, sobig.D ,trile. C
+    Trojan Horse Malwaare: a code that is malicious in nature and has the capacity to take control of the computer. 
+    Allow the hackers to gain remote access of a target system.
+        infected by Trojans without realizing it is called a direct action Trojan. ie name Js. ExitW. It can be downloaded from many malicious sites.
+            The effect of the Js. ExitW is to make the computer fall into a never-ending loop of start and shutdown.Does not damage anything
+        ie trojan atacks. Rakhni Trojan,Tiny Banker, 
+        Zeus or Zbot, often known as Zbot, is a toolkit that allows hackers to create their own Trojan virus and targets financial services. To steal user passwords and financial information, the source code employs strategies like form grabbing and keystroke logging.
+
+
+    Cross Site Scripting (XSS) is a vulnerability in a web application that allows a third party to execute a script in the user’s browser on behalf of the web application.
+        consequences such as account compromise, account deletion, privilege escalation, malware infection 
+        types of XSS
+            Reflected XSS: If the input has to be provided each time to execute
+            Stored XSS: When the response containing the payload is stored on the server in a way that the script gets executed on every visit without submission of 
+            
+            Cross-Site Scripting (XSS): XSS allows the attackers to insert client-side script into web pages. E.g. Submission of forms. It is a term used to describe a class of attacks that allow an attacker to inject client-side scripts into other users’ browsers through a website. 
+
+
+    SQL Injection 
+        An attack that employs malicious SQL code to manipulate backend databases in order to obtain information 
+
+        Error-Based SQL Injections:
+            obtain information about the database structure from error messages issued by the database server.
+        Union-Based SQL Injections
+            use the UNION SQL operator to aggregate the results of two or more SELECT queries into a single result, which is then returned as part of the HTTP response.
+        Blind Boolean-based SQL Injections
+            Boolean-based SQL Injection works by submitting a SQL query to the database and forcing the application to produce a different response 
+        Blind Time-Based SQL Injections
+            works by sending a SQL query to the database and forcing it to wait for a predetermined length of time (in seconds) before answering
+
+    Buffer Overflow Attack
+        A buffer is a temporary area for data storage. When more data (than was originally allocated) gets placed by a program or system process, the extra data overflows.
+        It causes some of that data to leak out into other buffers, which can corrupt or overwrite whatever data they were holding.
+
+        caused when a program attempts to allocate more memory than it was designed for
+
+    Reverse Engineering 
+        a process of recovering the design, requirement specifications, and functions of a product from an analysis of its code.Tools bunch,cia,pbs
+
+            Goals
+                Detect side effects, Synthesis higher abstraction, Facilitate Reuse, Cope with Complexity, Recover lost information
+
+
+    A vulnerability is a defect in a system’s design that can be exploited
+    Exploit is a piece of software, a bit of data, or a series of commands that exploits a defect or vulnerability to perform unwanted or unauthorized actions
+                Types expolit
+                Zero-click: A zero-click attack is an exploit that does not involve any user engagement, such as key presses 
+                Pivoting: technique in which a compromised system is used to target other systems on the same network in order to circumvent restrictions such as firewall setups 
+
+        types of attacks 
+        DDoS (Distributed DoS) – DDoS is a type of DOS attack where multiple compromised systems, are used to target a single system causing a Denial of Service (DoS)
+        malware,virus,botnet,DoS,Packet sniffer,IP Spoofing,Man-in-the-Middle Attack,Phishing ,DNS Spoofing etc
+
+    Web servers are where websites are stored.
+                types of major Web Attacks:
+
+                Denial-of-Service (DoS) / Distributed Denial-of-service (DDoS)
+                Web Defacement Attack
+                SSH Brute Force Attack
+                Cross-site scripting (XSS)
+                Directory Traversal
+                DNS Server Hijacking
+                MITM Attack
+                HTTP Response Splitting Attack
+
+    Voice-over IP hacking is a type of attack carried out by the malicious user for the purpose of infiltrating the phone system or unauthorized access to the phone system in order to steal the data. This lets the malicious user listen to all the conversations and calls, steal critical information
+
+    Spoof SMS Message in Linux 
+        fake-sms // git clone https://github.com/machine1337/fake-sms
+        Social Engineering Toolkit (SET)  //sudo setoolkit
+
+    Secure Code Review is code assessment for identifying security vulnerabilities at an early stage in development lifecycle.i.e Review security-related HTTP headers 
+
+    penetration testing
+        simulated cyber attack on a computer system, network, or web application. The purpose of a penetration test is to identify vulnerabilities in the system 
+
+        Types
+
+        Black Box Penetration Testing:- Attacker does not know the target as it exactly simulates an actual cyber attack where an actual black hat hacker attacks.
+        Grey Box Penetration Testing:- attacker is provided with a bit more information about the target like network configurations
+        White Box Penetration Testing: attackers have developer-level knowledge about the system which also includes an assessment of source code, have full access to the system
+    Phases of Penetration Testing Process
+
+        8. planning phase
+        9. scanning
+            variety of tools to perform different types of scans i.e 
+                Port scans: which identify open ports on live hosts, and the services running on those ports.
+                Vulnerability scans: search for known vulnerabilities in the system based on the version and configuration of the software running on the open ports.
+                Network mapping: this creates a visual representation of the target network, including the hosts, devices, and services. S
+                
+        10. Gaining Access
+            1. Password cracking: 
+            2. Social engineering
+            3. Exploiting software vulnerabilities
+        11. Maintaining Access: being able to be continuously within the target environment to collect as much data as possible.
+            1. Establishing backdoors
+            2. Privilege escalation
+        12. Be hidden from the user
+        
+        Penetration tools Nmap a network exploration tool and security scanner. identify hosts and services on a network,
+                        Nessus a vulnerability scanner. To find vulnerabilities in systems and applications.
+                        wireshark a packet analyzer.Capture and analyze network traffic.
+                        burp suite ,  a web application security testing tool. Find security issues in web applications.
+
+    types of Vulnerability Assessments : Host Vulnerability Assessment i.e servers,database,network,application scan ie frontend & backend
+        Tools for Vulnerability Assessment
+
+            Simulation tools that test web applications.
+            Scanners that test network services and protocols.
+            Network scanners that identify malicious packets and defects in IP addresses.
+
+
+    Methods To Preserve a Digital Evidence
+
+        Chain of Custody refers to the logical sequence that records the sequence of custody, control, transfer, analysis and disposition of physical or electronic evidence in legal cases. Steps Data collection, Examination,Analysis,reporting
+
+        Drive Imaging
+        Hash values
+        when generating disk image, the process generates cryptographic hash values like MD5, SHA1, etc. Hash Values are critical as:
+
+            They verify the Authenticity and Integrity of the image as an exact replica of the original media
+            any modifications like creating a new file or editing, a new hash value is generated
+            Hash value and other file metadata are not visible in a normal file ,access this information using special software.
+
+            If the hash values of the image and the original evidence do not match, means it was tempered with
+
+    A framework is a pre-built software that we can use as a foundation for our project without having to start from scratch.
+
+        A cybersecurity framework is a set of rules common to all security leaders that they must abide by.
+        It is a set of standards and practices that organizations follow to reduce cybersecurity risks.
+
+        functions: identification,response,protection,recover & Detection
+
+        Components: Framework Core; set of strategies,Implementation Tiers(guidelines & policies), profiles: records unique to each org.
+        Commonly used frameworks NIST Cybersecurity Framework, ISO 27001, ISO 27002, SOC2 & HIPAA
+
+    Cipher
+    When plain text is encrypted it becomes unreadable and is known as ciphertext
+
+    Cryptanalysis is the process of transforming or decoding communications from non-readable to readable format without having access to the real key
+        Forms of Cryptanalysis : 
+           
+            Linear cryptanalysis is a general type of cryptanalysis based on discovering affine approximations to a cipher’s action in cryptography.
+            Differential cryptanalysis is a sort of cryptanalysis that may be used to decrypt both block and stream ciphers, as well as cryptographic hash functions.
+
+    RC4 Rivest Cipher 4 is a symmetric stream cipher and variable key length algorithm.
+        It encrypts messages one byte at a time via an algorithm.
+
+    A hash function is nothing but a mathematical function that can convert a numeric value into another numeric value that is compressed. 
+    Hash Function is a function that has a huge role in making a System Secure as it converts normal data given to it as an irregular value of fixed length.
+        hash function returns are called the message digest or hash values.
+
+        Converting Hash Codes to their original value is an impossible task to perform. This is the main difference between Encryption as Hash Function. 
+            This property makes hash functions useful for verifying the integrity of data.any changes to the data will result in a different hash value.
+
+         Features of hash functions 
+            One-way function
+            Deterministic: Hash functions are deterministic, meaning that given the same input, the output will always be the same
+            Fixed-size output
+            Collision resistance: difficult to find two different inputs that produce the same hash value
+            Non-reversible
+
+            DISD  MD5 hash function, which is vulnerable to collision attacks, rainbow table attack
+
+    
+    Authentication protocols
+        Kerberos is a protocol that aids in network authentication.for validating clients/servers during a network employing a cryptographic key
+       
+        LDAP Lightweight Directory Access Protocol. It is a protocol that is used for determining any individuals, organizations, and other devices duringa network regardless of being on public or corporate internet.
+       
+        OAuth2 as the name suggests it is an authorization framework that promotes granting limited access to the user on its account through an HTTP service
+       
+        SAML Security Assertion Markup Language which is based on XML-based authentication data format provides the authorization between an identity provider and service provider
+
+        RADIUS stands for Remote Authentication Dial-In User Service. It is a network protocol that provides sufficient centralized Authentication, Accounting,         
+
+    IP security (IPSec)
+    an Internet Engineering Task Force (IETF) standard suite of protocols between two communication points across the IP network that provide data authentication, integrity, and confidentiality.
+
+    
+    IPSec (IP Security) architecture uses two protocols to secure the traffic or data flow. These protocols are ESP (Encapsulation Security Payload) and AH (Authentication Header). 
+    advantages that Authentication Header provides,
+
+        Message Integrity 
+        Source Authentication 
+        
+        
+    Architecture: Confidentiality,Authenticity,Integrity
+
+    Componets IP Security
+
+    Encapsulating Security Payload (ESP)
+    Authentication Header (AH)
+    Internet Key Exchange (IKE)
+
+    Secure Socket Layer (SSL) 
+        provides security to the data that is transferred between web browser and server.
+
+        Secure Socket Layer Protocols: 
+            SSL record protocol: provides confidentiality & message integrity
+            Handshake protocol: used to establish sessions.
+                Phase-1: both Client and Server send packets to each other. In this IP session, cipher suite and protocol version are exchanged for security purposes. 
+                Phase-2: Server sends his certificate and Server-key-exchange. The server end phase-2 by sending the Server-hello-end packet. 
+                Phase-3: In this phase, Client replies to the server by sending his certificate and Client-exchange-key. 
+                Phase-4: In Phase-4 Change-cipher suite occurs and after this the Handshake Protocol ends. 
+            Change-cipher spec 
+                Unless Handshake Protocol is completed, the SSL record Output will be in a pending state
+                purpose is to cause the pending state to be copied into the current state. 
+                
+            Alert 
+                purpose is to cause the pending state to be copied into the current state. 
+    Transport Layer Security (TLS)
+         designed to provide security at the transport layer. 
+         TLS was derived from a security protocol called Secure Socket Layer (SSL)
+
+
+      Methodology to follow
+        Reconnaissance: how to gain access without leaving a trace.
+        Scanning: Vulnerability Scanning,Mapping of Network,Port Scanning
+        Gaining : information gatheringcontrol
+        Maintaining Access
+        Log clearing  
+
+    1. Metasploit
+
+     Framework to write,test and execute exploit code
+
+        Components
+            Auxiliaries
+                Specific piece of code written to perfom a particular task.i.e, if a web server is vulnerable
+                auxiliary module include: Admin,Client,Spoof,Snipper etc
+            Payloads
+                Action need to be performed after completion of execution of an attack
+                metasploit has over 42 payloads which are categorised as: singles, stagers & stages
+            Exploits
+                a code that takes advantage of a software vulnerability or security flaw.one use this code on the target system to take advantage of the vulnerabilities present in the target system
+                there are of classified in 17 categories. i.e Aix,Unix,Network,Android etc
+            Encoders
+                Encoders use various algorithms and techniques to obscure the payload in a way that it doesn’t get detected by antivirus software.
+                We use encoders since it is possible that your payload gets detected by any of the security software present on the target system or antivirus
+                i.e cmd,php,x64,x86
+            Post-Exploitation Activities (Post)
+                 Use of the post modules to further infiltrate the target system. these  activities include
+                    Retrieving the system credentials
+                    Stealing cookies and saved credentials
+                    Capturing keystrokes on the target system
+                    Escalating user preivileges
+            Evasion
+                Allow user to generate a windows EXE that evades against microsoft windows defender
+                Techniques such as shellcode encryption, source code obfuscation, Metsam, and anti-emulation are used to achieve this.
+                To get best output, using payloads that uses more secure channels such as HTTPS, or RC4 in order to avoid the payload network traffic getting caught by antivirus better.
+
+            Nops, or No Operation instructions, are an important part of Metasploit, and are often used to create powerful exploits.
+
+
+                Application    =  Explot
+                Presentation   =  Phishing
+                Session        =  Hijacking
+                Transport      =   reconnaissance
+                Network        =  MITM
+                Data Link      =   Spoofing
+                Physical       =  Sniffing
+
+        Information gatherin
+            Nmap recon/scan networks. It is used to discover hosts, ports, and services
+            Zenmap GUI of Nmap
+            whois lookup  a database record of all the registered domains over the internet.check available domainnames,identify trademarks
+                could even track registrants with fraud domain,  identify and fix DNS or domain-related issues.
+            SPARTA is a python based Graphical User Interface tool. used to export Nmap outut to XML,
+                automate the process of Nikto tool to every HTTP service or any other service.
+                save the scan of the hosts you have scanned earlier in order to save time
+                reuse the password which is already found and is not present in the wordlist.
+            nslookup stands for nameserver lookup
+                used to get the information from the DNS server. It queries DNS to obtain a domain name, IP address mapping, or any other DNS record
+                    nslookup eno.com
+            Osintgram is an OSINT tool to run on reconnaissance Instagram to collect and analyze
+
+     Footprinting can be used for several purposes, all depending on the attacker’s situation, 
+        first step gets information such as  domain name,comp names,ip addresses, other network relate activities
+
+
+        Footprint Through Search Engines
+         is a digital trace of your activity that you leave behind on the Internet. 
+            also include information about what social networks and other websites people visit, what content they look at and for how long, who their Facebook friends are, and when they were last online; all this data is available with just one click to Google or to a range of specialized search engines.
+                ie Reconwolf Tool 
+
+        DNS Footprinting
+            nslookup can be used
+
+            DNS Footprinting is a technique that is used by an attacker to gather DNS information about the target system. 
+                    
+                                 A	A record is an address mapping record, also known as a DNS host record.
+                                MX	The mail server record specifies an SMTP email server 
+                                NS	It specifies the authoritative Name Server.
+                                CNAME	Conical Name record, alias record used to alias a hostname to another hostname
+                                SOA	Start of Authority is the authoritative Name server for the current DNS zone.
+                                PTR	Pointer records, It allows a DNS resolver to provide an IP address and receive a hostname
+                                TXT	Text Record, It contains machine-readable data such as DKIM.
+                                HINFO	Host information record includes CPU type and OS
+                                SRV	Service Records
+
+                            ie. nslookup -type=mx kaiandkaro.com
+                                 dig oniondoctor.co.ke
+        Whois Footprinting
+            collects data about targets and their condition
+                Whois foot printing is the act of collecting information of an organization or large group of internet users by requesting whois public records from a hoster like .com, .net
+
+            Types 
+                Active footprinting:
+                 An active footprinting represents a process that uses tools and techniques, such as using the traceroute command or the ping sweep (Internet Control Message Protocol Sweep) to collect data about a particular target.
+
+                Passive footprinting:
+                    include performing  Google searches, browsing Archive.org, using NeoTrace, browsing employee profiles on social media, browsing job pages
+
+
+
+        Port Scanning 
+            is one of the features of Nmap wherein the tool detects the status of the ports on active hosts in a network. T
+            types; open,iltered and closed
+
+            Network scanners do not actually harm computers; instead, they make requests that are similar to those sent by human users who visit websites or connect to other computers using applications like Remote Desktop Protocol (RDP) and Telnet
+
+            A port scan is performed by sending ICMP echo-request packets with specific flags set in the packet headers that indicate the type of message being transmitted
+
+            types scan
+                Vanilla : looks for open UDP ports
+                sweep: pings an identical port on over one computer to envision which pc is active
+                FTP bounce : scanner goes through an FTP server to mask the source
+                Stealth: The scanner locks scanned computer records Scan of port
+
+
+
+        Scanning 
+            allows you to identify open ports on the target system and can be used for port mapping, performing an interactive session with the    operating system via those ports, or even redirecting traffic from these open ports. 
+
+            creating a list of IP addresses and netmasks to scan all the active addresses on the network. This is called a ping sweep.
+             scanning help in information gathering,vulnerability identification, network mapping
+
+
+                types of scanning technique
+
+                    TCP connect scan;
+                     sends TCP SYN packets to each port on the target system, waiting for an RST/ACK (meaning that the port is closed).. This is a steal their type of scan because it does not show the open ports on the target system. The last port that responds is its open port
+                    TCP syn port scan:
+                     This is a similar type of scan, but the packets are TCP SYN packets and not TCP ACK. This type of scan sends packets to ports that are open and waiting for a reply.
+                    Network Scanning: 
+                     Network scanning is used to identify the devices and services that are running on a target network, determine their operating systems and software versions, and identify any potential security risks or vulnerabilities.
+
+                    Vulnerability Scanning: 
+                      identification of potential security loopholes which can be targeted by hackers for attacking the computer network syste
+                    
+                     Passive scanning, which only gathers information that is readily available (information transmitted over the network or stored in system logs.)gather information about a target system or network without actively interacting with the target. , active scanning actively interacts with the target system to gather information sends requests or packets to the target and analyzes the responses,
+                       
+                        active scanning can trigger security measures, such as firewalls or intrusion detection systems (IDS), which can alert organizations to the presence of an attacker.
+
+                        passive scanning is that it is less intrusive and less likely to trigger security measures
+
+                A rootkit is designed to conceal the presence of certain types of malicious activity, including malware and viruses
+
+                WAScan stands for Web Application Scanner.
+                    open-source web application vulnerability scanner. The tool uses the technique of black-box to find various vulnerabilities. 
+                    extracts links and forms of the web application and scans one by one to find vulnerabilities. 
+
+
+                TCP-ACK Scanning:   
+                    In this scan, the ACK packets are sent to the target port in order to know that if that port is filtered or unfiltered. In case of filtered port, the response will be either no response or an ICMP destination unreachable reply packet will be shown. In case of unfiltered port, an RST reply packet will be sent to all the open and closed ports.
+
+                    nmap -sA -T4 <anydomain address>
+                         Typical Probe Response looks like with their state:
+
+                            TCP RST response – unfiltered
+                            No response received – filtered
+                            ICMP unreachable error – filtere
+
+                    Port Scanning Techniques in Nmap
+
+                        TCP Connect Scan (-sT):Nmap sends a TCP request packet to each and every port specified and determines the status of the port by the response it receives.uses the concept of a full three-way handshake 
+                         
+                         TCP SYN Scan (-sS): SYN scans are often called “Half-open” or “Stealth” scans. 
+                            SYN scan works the same way as TCP Connect scan with closed and filtered ports i.e receives a RST packet for closed port and no response for filtered ports. do not uses the concept of a full three-way handshake 
+                        
+                        UDP Scan (-sU): UDP unlike TCP, doesn’t perform a handshake to establish a connection before sending data packets to the target port but rather sends the packets hoping that the packets would be received by the target port.
+                            When there’s no response from the target port after sending a UDP packet
+                             means that the port is either “open” or is running behind a firewall i.e “filtered”  the server would just drop the packet with no response.
+
+                        SYN scanning involves the establishment of a half connection with the destined target.
+                            does not involve a full connection establishment, and thus it is also referred to as a half-open scanning technique.
+
+                        UDP scanning is a process in which we scan for the UDP services that are being deployed on the target system or are currently in a running state. 
+                            Popular services using UDP are DNS,SNMP Simple Network Management Protocol , DHCP Dynamic Host Configuration Protocol
+
+                                Nmap scan UDP sudo nmap -p <port numbers> 
+                                -sU <target domain>   If there is no response, the port is assumed to be open, If an ICMP error packet is returned, the port is considered closed.
+                        TCP Window Scan is a new and exciting way to find out what is happening on your network from the outside. 
+
+                        IPv6 Scanning is a term coined for Scanning of IPv6 Networks
+
+        Enumeration is fundamentally checking
+            Enumeration is utilized to gather usernames, hostname, IP addresses, passwords, arrangements, and so on. 
+
+                Types
+                    NetBIOS(Network Basic Input Output System) Enumeration:
+                    enables computer communication over a LAN and the sharing of files and printers
+                         used to distinguish the organization gadgets over TCP/IP
+
+                    SNMP(Simple Network Management Protocol) Enumeration: 
+                        application layer protocol that runs on UDP and maintains and manages IP network routers, hubs, and switches. SNMP agents run on networking devices in Windows and UNIX networks. made of 3 parts; managed evice, agents and network management syste
+
+                    LDAP Enumeration:
+                        meaning Lightweight Directory Access Protocol (LDAP) is an internet protocol that works on TCP/IP, used to access information from directories.
+                        The LDAP protocol is used to access an active directory.
+
+                    NTP Enumeration:
+                         Network Time Protocol process by which an attacker can discover NTP servers on the network. 
+                            info can be used to get vulnerable servers
+                    
+
+                     SMTP Enumeration:
+                      meaning SMTP: set of communication guidelines that allow web applications to perform communication tasks over the internet, including emails.
+                        SMTP enumeration allows us to identify valid users on the SMTP server.
+
+                    DNS Enumeration using Zone Transfer:
+                        It is a cycle for finding the DNS worker and the records of an objective organization.
+                    IPsec Enumeration:
+                        process by which an attacker can discover NTP servers on the network. 
+.
+                    VoIP(Voice over IP) Enumeration:
+                        VoIP uses the SIP (Session Initiation Protocol) protocol to enable voice and video calls over an IP network.
+                    RPC Enumeration:
+                        RPC is a remote procedure call  aka Real-time Publish/Subscribe.(or a function call that carries out tasks on a different computer). RPC enumeration is the process of discovering what services are running on what port numbers
+                            types of RPC services: machine dependecies special files that an application requires in order to work properly and client specific dependecies RPC servers make calls to their client’s applications via the RPC interface, which is identified by a transport layer protocol (TCP/IP) port number. allows the RPC server to use a single port number for both client and server applications
+
+                    Security Testing in Enumeration is when a tester repeatedly performs the same task on a system to see if vulnerabilities exist
+                        One way that a tester might do this is by creating scripts or programs to test for the existence of security issues in the system’s software code.
+
+                            An example of Security Testing in the enumeration is when you create a program that loads web pages and searches for the same information on all of them. If you discover the results are different and sometimes even the same between web pages, then this could show security issues. This is because hackers might interfere so by creating their own websites with the same content.
+
+                    Unix/Linux User Enumeration
+                    SMB Enumeration server message block
+                        a client-server communication protocolused for sharing access to files, devices, serial ports, and other resources on a network.
+
+                    NB 
+                        RPC is a protocol that makes use of the remote procedure call (RPC) framework. Thus, it is differentiated from other protocols due to its focus on services rather than applications.
+
+                        RPC service enumeration is not the same as finding out what your target’s vulnerabilities are. It is more about taking note of specific information about the network in general
+
+                        Netstat is a utility for obtaining protocol statistics, NetBIOS name table, name cache information and current TCP/IP connections over NBT (NetBIOS over TCP/IP)
+
+    System Hacking 
+        process of exploiting vulnerabilities in electronic systems for the purpose of gaining unauthorized access to those systems.
+    Non-electronic password attacks 
+         carried out through brute force or social engineering.
+        are forms of hacking that seek to bypass any form of authentication or authentication system. uses an automated script to probe for passwords on the network
+            can done is by placing port scanning software on an access point, expecting to gain access without being noticed ,using social engineering
+            Prevented via MFA, encryption
+    Password Guessing attack
+         process of attempting to gain the system’s access by trying on all the possible passwords (guessing passwords)
+            Dictionary Attack,Brute force Attack,Keylogger Attack,Man-in-the-middle attack,Credential Stuffing Attack
+
+        Credential Stuffing 
+            the attacker uses the list of credentials that are publicly available and then breaks into the system with various types of custom bots and other automation along with IP spoofing to prevent getting blocked. IP Spoofing is essentially a technique used by a hackers to gain unauthorized access to Computers
+
+        Types of Brute Force
+            Dictionary attacks,rainbow,reverse brute force,hybrid brute force,simple brute force & credential stuffing
+        
+        Brute force attack
+            Users regularly utilize common word patterns as passwords, including dates of birth, anniversaries, street addresses, and other everyday information.
+            trying every character combination in the password until he finds one that works
+        Reverse Brute Force Attack\
+            targets all users of the database system instead of just the one that is being targeted.  involves an automated technique that tests a set of widely used login credentials on a substantial number of database users. 
+
+        A Password Hashing System (PHS) is a method of storing passwords securely, making them difficult for an unauthorized person to crack through brute force or dictionary attack
+
+        Capture the Flag (CTF) is a computer security competition in which teams compete to obtain as many flags as possible from a selected set of computers, and return them to their own base before time runs out
+
+        The USB drop attack is a client-side attack in system hacking. This means that an attacker must be physically near the victim and plug a malicious USB device into the victim’s computer to launch this type of attack.
+
+        A sniffing attack in system hacking is a form of denial-of-service attack which is carried out by sniffing or capturing packets on the network, and then either sending them repeatedly to a victim machine or replaying them back to the sender with modifications
+            Another sniffing attack called ARP spoofing involves sending forged Address Resolution Protocol (ARP) messages to the Ethernet data link layer.
+            discovering physical address associated with given network address.
+
+            ARP spoofing is not a very effective attack, except in networks that are poorly secured. 
+
+            MITM attacks: DNS spoofing,IP spoofing, SSL spoofing
+
+        Rainbow Tables are a large set of pre-computed hashes that are used for reversing cryptographic hash functions generally used for password cracking. It makes password cracking easy. Rainbow tables can be used to recover many types of password hashes for example MD4, MD5, SHA1, etc
+        Rainbow Tables are lookup tables to compare password hash to generated password hashes for recovering/cracking passwords.
+            MD5, which stands for Message Digest Algorithm 5, is a widely used cryptographic hash function that produces a 128-bit (16-byte) hash value
+            SHA-1 or Secure Hash Algorithm 1, 2, 3. hese algorithms are designed to generate a unique fixed-size hash (digest) 
+
+        Elcomsoft Distributed Password Recovery is software to help you break the password on various types of computers, including standard Windows and Linux PCs. 
+            to use Elcomsoft Distributed Password Recovery, you will need a Home Agent application installed
+
+        pwdump7 
+            "pwdump7" refers to a version of "pwdump," a tool used to extract password hashes from Windows systems. 
+            Password dumping tools like pwdump7 are designed to obtain the cryptographic hashes of system user passwords that are stored in the Windows Security Accounts Manager (SAM) database or in Active Directory.
+
+            Every password is hashed before being saved in SAM. The LSA (Local Security Authority) is in charge of confirming user login by comparing the passwords with the database kept in SAM. As soon as Windows starts, SAM begins operating in the background. 
+            Passwords that are hashed and saved in SAM can be retrieved in the registry; simply open the Registry Editor and navigate to HKEY LOCAL MACHINESAM. SAM is located in C:\Windows\System32\config.
+
+        FGDUMP  
+            a tool and technique used by the ethical hacker that helps the intruder gain full access to the operating system of a remote machine
+            This tool can be quite useful when you are trying to find vulnerabilities within a company’s computer systems, or if you want to get into other malicious purposes such as cyberstalking.
+            popular uses is to download password lists (often called hash tables) from remote systems. 
+
+            under the SAM or Security Account Management database is where you can use fgdump to access this information.When using fgdump, you will usually want to run it as a local root user, often called SUID root in Linux terms.must first be run with the IP address of the target computer.
+
+        A firewall is a network security device, either hardware or software-based, which monitors all incoming and outgoing traffic and based on a defined set of security rules accepts, rejects, or drops that specific traffic.
+            Accept: allow the traffic
+            Reject: block the traffic but reply with an “unreachable error”
+            Drop : block the traffic with no reply
+
+        L0phtCrack is used to audit and recover passwords used on networks to make sure they are hard to crack, frequently changed, and never recycled.
+
+        Salted password : Salt is a cryptographically secure random string that is added to a password before it’s hashed, and the salt should be stored with the hash, making it difficult for an attacker to know the original plaintext without having access to both sources. 
+
+        DLL Hijacking 
+        refers to a security exploit that takes advantage of the way some Windows applications search and load Dynamic Link Libraries (DLLs).
+         DLL is a module that contains functions and data that can be used by another module (application or DLL). Applications may require these external code libraries to perform various functions.
+
+            DLL Search Order Attack: Here, the order of search follows a definite pattern for DLL in Windows Operating System.
+            DLL Side Loading Attack:  Here, the affected target by DLL Attack is WinSxS directory.
+            Phantom DLL Hijacking Attack: Here, old DLL are used as advantage for getting into the system.
+
+        Privilege escalation is the process of exploiting a bug or design flaw in an operating system and obtaining elevated privileges to access information 
+
+        method to spread ransomware
+            Phishing Emails,Remote Desktop Protocol,Removable Device(usd drop)
+
+        Malvertising is a new form of attack adopted by cyber attackers that makes use of online advertisements for spreading malicious software into computer systems.
+        aka malware advertising.
+
+         Trojan malware, is actually malicious code or software that looks legitimate to the victim but can take full control over the victim’s computer.
+         designed to steal, manipulate, disrupt, damage, or do some other destructive action on your data, network, and computer system.
+         trojan Horse usually comes with monitoring tools and key loggers. These are active only when specific events are alive
+
+
+         Cryptolocker ransomware is a malicious malware code that infects a computer with a Trojan horse and then looks for files to encrypt.
+         Zeus’ malware is a type of Trojan malware that contains a malicious code package for Microsoft Windows.Even with the latest antivirus and other security suites, it is very difficult to identify Zeus because it uses stealth technology to hide from antivirus.spread using phishing schemes
+
+            How to Install Trojan Virus
+                 Social Engineering,Spear Phishing,Phishing URLs,Pirated Software
+        A botnet is a collection of compromised computers (called bots) residing on the internet that can be controlled by cybercriminals.
+            A local botnet is a botnet that resides on the same physical network as your devices
+            Remote botnets are remotely located from your devices and can be on a totally different network.
+        A proxy Trojan is a type of computer virus that disguises itself as something else, such as a harmless file or website
+        Proxy Trojans are malicious code specially designed for hijacking, which turns the target user’s computer or device into a proxy server. 
+            When a user accesses it, the proxy Trojan hijacks their browser and sends the user to bogus websites or downloads malicious files
+            Once they are installed, they start to actively seek out sensitive data, such as credit card numbers, login information, and even passwords
+            once they have collected the data they want, they typically delete their presence from the infected device.
+        A banking Trojan is a piece of malware that is used primarily to steal banking credentials by remotely installing malicious software on a victim’s computer system
+
+         ports are virtual points of entry on a computer or a network device that allow it to send or receive data. 
+
+
+       System Integrity Check 
+       A system integrity check is a part of the system hardening process to confirm that we have taken all the necessary measures to prevent any unauthorized access to our systems and files. performed by executing different system and network vulnerability scanners, such as Nessus, QualysGuard, OpenVAS, and Nikto
+
+       Code emulation
+       Code emulation is a technique for detecting technical events that are attributable to computer viruses. The technique is used in antivirus software and in intrusion detection systems. 
+       It compares an executable file or memory dump from one system with an archival copy of the same that has been saved on the remote system to see if there are any differences
+
+       Heuristic Virus
+       A heuristic virus is a type of computer virus that replicates by guessing. It does this by analyzing what it perceives as the user’s behavior and creating an infection that tries to mirror it.
+
+       A protocol analyzer is a tool that helps you to monitor the network traffic and analyze its behavior.
+
+       Dynamic Host Configuration Protocol (DHCP)
+        DHCP helps enterprises to smoothly manage the allocation of IP addresses to the end-user clients’ devices such as desktops, laptops, cellphones,
+        is an application layer protocol that is used to provide:
+            Subnet Mask (Option 1 - e.g., 255.255.255.0)
+            Router Address (Option 3 - e.g., 192.168.1.1)
+            DNS Address (Option 6 - e.g., 8.8.8.8)
+            Vendor Class Identifier (Option 43 - e.g., 
+            'unifi' = 192.168.1.9 ##where unifi = controller)
+
+        The four packet types that make up the DHCP IP address assignment operation are DISCOVER, OFFER, REQUEST, and ACKNOWLEDGMENT. 
+
+
+    DHCP Starvation Attack
+        A DHCP Starvation attack can result in a Denial of Service (DoS) attack or a Man in the Middle (MITM) attack. 
+        the attacker sends tons of bogus DHCP Discover messages with spoofed source MAC addresses. The DHCP server tries to respond to all these bogus messages, and as a result, the pool of IP addresses used by the DHCP server is depleted.
+
+
+            Types of ARP Spoofing(Address Resolution Protocol):Man-in-the-Middle,Session hijacking, Denial-of-service attacks
+
+        Facebook attack
+            setoolkit
+            Select Social Engineering Attacks
+            Select Web Attack Vectors
+            Select Credential Harvester Attack
+            Select Site Cloner
+            Type your IP address
+            URL you want to clone 
+             open the website on other device with the IP.
+                The credentials are stored in an XML file /root/.set/reports
+
+
+        Types of DDoS attacks: Application layer attack i.e HTTTP flood attack, Protocol attacks ie SYN attack & ping of death, volumetric attacks ie UDP,Tcp flood attack
+        Phlashing aka PDoS (Permanent Denial of Service) damages the hardware
+        TCP interception software intercepts TCP synchronization (SYN) packets from client to server that match the extended access list
+
+        Ingress filtering is a technology that is designed to classify and prevent internet access by identifying unauthorized users.
+        Egress Filtering is the term for filtering data packets as they leave your network. 
+
+        SOCKS4 doesnot support UDP,IPV6 protocol, SOCKS5 best
+
+        TCP/IP TCP model breaks down sender messages or data into small packets and forwards them to the Internet Protocol (IP) layer
+
+        Session 
+            a "session" that the website creates to remember who you are. This session lets you access various parts of the service without having to log in every single time you click a new link or request a new page.
+
+            Session hijacking,
+             then, is when a hacker steals the digital version of this "special pass" – the session ID or token that identifies you to the website
+
+                TYpes
+
+                Brute-forcing the Session ID: attack user uses guessing and trial method to find Session ID depending on its length.
+                Cross-Site Scripting (XSS) or Misdirected Trust: attacker tries to find out the flaws and the weak point in the web server and injects its code into that.
+                Man-in-the-browser: Man-in-the-browser uses a Trojan Horse (program that uses malicious code) to perform its required action. 
+                Malware infections
+                Session Fixation: ttackers create a duplicate or another disguised session in Session Fixation.
+                Session side-jacking: attackers tries to get access over a session using the network traffic.
+
+
+            Application Level Hijacking Using Proxy Hacking
+                The attacker will modify the traffic and information being sent to a trusted application, then pretend the traffic came from a legitimate user.
+                 done on vulnerable web applications that do not use SSL to encrypt data
+            Proxy hacking is a method used by attackers to exploit a program’s internal functions by sending control commands to the proxy server. 
+
+            Session replay attacks, also known as replay or replay attacks, are network attacks that maliciously “retry” or “delay” valid data transmissions.
+                Hackers can do this by intercepting the session and stealing the user’s unique session ID (stored as either a cookie, URL, or form field). 
+                A replay attack occurs when a cybercriminal intercepts a secure network communication, intercepts it, and fraudulently delays or transmits it to trick the recipient into doing what the hacker wants
+
+            This cookie is a small piece of data that remembers you are logged in. So, every time you visit a new page on the site, you don't have to log in again—you just show your cookie.
+            Cookie Hijacking happens when someone malicious gets their hands on your cookie from a website. They can use this cookie to pretend they are you, access your account, see your personal information, or do anything you could do on the website.
+
+            Session prediction attacks focus on predicting session ID values ​​that allow an attacker to bypass the application’s authentication scheme. By analyzing and understanding the session ID generation process, an attacker could predict a valid session ID value and gain access to the application
+                Session prediction is impossible without the help of the session ID cookie.
+
+            A Session fixation attack is an attack that occurs when a malicious user sets up a fake session before the legitimate users are able to log in
+
+            Port stealing is a man-in-the-middle attack via a LAN switch. It attempts to intercept packets sent to another host by stealing the switch’s port from the desired host
+
+
+        Cross-Site Scripting (XSS) : allows attackers to inject malicious scripts/ JavaScript cod into content that appears to be from a trusted source
+        SQL Injection allows an attacker to interfere with the queries that an application makes to its database
+
+
+        Evading IDS,Firewall & Honeyport
+             Firewalls are designed to protect networks from unauthorized access, but a firewall can also block legitimate traffic if not configured correctly
+
+            bypass firewalls using SSH:
+                SSH Tunneling ;creates a secure connection between two hosts over an insecure network. This connection can be used to tunnel traffic through the firewall.
+                SSH Port Forwarding; allows traffic to be forwarded from one port on the server to another port on the client.
+                SSH SOCKS Proxy; allows traffic to be forwarded through the SSH connection
+
+
+        Bitvise SSH Client (file transfers and remote access) uses a tunneling method to ensure that your data stays encrypted from machine to machine
+        It is a reliable way of preventing unauthorized access when you’re away from your computer.
+
+        Source port randomization is a security technique used to make it harder for attackers to predict the source port number from which a DNS (Domain Name System) query is sent. When a DNS resolver sends a query to a DNS server, it can choose the source port from a large range of possible port numbers (typically between 1024 and 65535).
+
+        Cache Poisoning in DNS; attacker sends malicious responses to a DNS server, attempting to trick it into storing incorrect IP address information for a domain.
+
+        Types of Evasion Technique For IDS
+             Packet Fragmentation; he IP packets are split into smaller fragments. By doing this, the TCP header is split across multiple fragments.
+             Source Routing; Packets pass through a number of routers before reaching the target host.
+             Source Port Manipulation
+             IP Address Decoy
+             IP Address Spoofing
+             Customizing Packets
+
+        
+
+
+            
+
+
+
+
+
+
+
+
+            
+
+            
+
+
+
+
+
+
+        
+
+
+    
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            

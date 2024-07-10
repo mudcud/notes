@@ -1,0 +1,30 @@
+man <tool>      Opens man pages for the specified tool.
+<tool> -h       Prints the help page of the tool.
+pwd Returns     working directory name.
+ls              Lists directory contents.
+tree            Lists the contents of a directory recursively.
+cd              Changes the directory.
+clear           Clears the terminal.
+touch           Creates an empty file.
+mkdir           Creates a directory.
+mv              Move or rename files or directories.
+cp              Copy files or directories.
+locate          Uses the locale database to find contents on the system.
+cat             Concatenate and print files.
+more            Pager that is used to read STDOUT or files.
+head            Prints the first ten lines of STDOUT or a file.
+tail            Prints the last ten lines of STDOUT or a file.
+whoami          Displays current username.
+id              Returns users identity.
+hostname        Sets or prints the name of the current host system.
+uname           Prints operating system name.
+ifconfig        The ifconfig utility is used to assign or view an address to a network interface and/or configure network interface parameters.
+ip              Ip is a utility to show or manipulate routing, network devices, interfaces, and tunnels.
+netstat         Shows network status.
+env             Prints environment or sets and executes a command.
+who             Displays who is logged in.
+passwd          Changes user password.
+useradd         Creates a new user or update default new user information.
+userdel         Deletes a user account and related files.
+addgroup        Adds a group to the system.
+delgroup        Removes a group from the system
