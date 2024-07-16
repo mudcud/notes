@@ -466,9 +466,17 @@ discovering sensitive files man dirb
     DOM based. run without communication with web server unlike the two attacks above
     
 
-
-
-
+PORT filtered, means nmap can't know if the port is open or closed.Stay away 
+netmask, max range of ip
+oG grippable output 
+vv double verbose give information about the scan
+  save nmap -oG - 192.168.100.0-255 -vv >/home/rulz/Desktop/Results
+specific port hack 
+  nmap -oG - 192.168.100.0-255 -p 23 -vv >/home/rulz/Desktop/Resultsy.txt
+A - aggresive scan
+sV service version. versin or OS ,or ip ranges being used. ie to know if vulnerabilities were in ubuntu 2.0. also line attack for the specific version
+-F fast and given most targeted port. will give 100 ports unlike the default 1000 ports
+T time for performance. not a big deal
 
 
 
