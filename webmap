@@ -13,5 +13,7 @@
 
 
  public curl ifconfig.co
+ private ifconfig
 
-private ifconfig
+
+                sudo python3 Scanner.py
