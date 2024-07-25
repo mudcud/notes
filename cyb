@@ -1,6 +1,16 @@
 Cyber Security is the body of technologies, processes, and practices designed to protect networks, devices, programs, and data from attack, theft, damage, modification or unauthorized access.
     TYpes of cyber security: Network security,(securing comp network),application,data, cloud,mobile, end-point(securing individual devices)
 
+    OSI layer TCP
+        1. </ Physical >  Ethernet cables, Wi-Fi. Transmits raw bit streams over a physical 
+        2.  </ Data link >, Ethernet, Wi-Fi (MAC addresses).Provides node-to-node data transf
+        3.  </ Network >;   IP (Internet Protocol), routers. Handles the routing of data packets
+        4.   </ Transport > ; TCP, UDP (User Datagram Protocol). rovides reliable data transfer, flow control
+        5. </Session>;   NetBIOS, RPC (Remote Procedure Call). Manages sessions or connections between applications
+        6.  </ Presentation>; SSL/TLS (encryption), JPEG, ASCII. Translates data between the application layer and the networ
+        7. </Application>, HTTP, FTP, SMTP. Provides network services directly to applications
+    
+
 
     OSI Model (Open Systems Interconnection. )
 
@@ -550,6 +560,7 @@ Cyber Security is the body of technologies, processes, and practices designed to
             creating a list of IP addresses and netmasks to scan all the active addresses on the network. This is called a ping sweep.
              scanning help in information gathering,vulnerability identification, network mapping
 
+                TCP connection based,must establish connection before sending packests
 
                 types of scanning technique
 
@@ -594,6 +605,7 @@ Cyber Security is the body of technologies, processes, and practices designed to
                             SYN scan works the same way as TCP Connect scan with closed and filtered ports i.e receives a RST packet for closed port and no response for filtered ports. do not uses the concept of a full three-way handshake 
                         
                         UDP Scan (-sU): UDP unlike TCP, doesn’t perform a handshake to establish a connection before sending data packets to the target port but rather sends the packets hoping that the packets would be received by the target port.
+
                             When there’s no response from the target port after sending a UDP packet
                              means that the port is either “open” or is running behind a firewall i.e “filtered”  the server would just drop the packet with no response.
 
@@ -886,6 +898,161 @@ Cyber Security is the body of technologies, processes, and practices designed to
              Customizing Packets
 
         
+  TYpe of scanning
+    Network scanning - find host active and how connected i.e mail server etc
+    POrt scanning - Targeting specific TCP flags
+
+TCP flags = signals used during call ie hello, bye
+  They are control bits in the TCP header that manage the state and functionality of a TCP connection
+
+    1. SYN (Synchronize): Used to initiate a connection  , "hello"  
+    2. ACK (Acknowledgment): acknowledgment packet is valid and confirms the receipt of data. ,Hello too
+    3. FIN (Finish): Used to gracefully terminate a connection , "goodbye"
+    4. RST (Reset): Resets the connection. "Credit over,call dropped"
+    5. PSH (Push): Transmit data immediately "Tuma kwa hii no. saying something without waiting for response"
+    6. URG (Urgent): Packet processed immediately. that is prioritized "listen to this right now"
+    7. ECE (ECN-Echo): Used to signal congestion in the network "signals for smooth talking"
+    8. CWR (Congestion Window Reduced): Indicates that congestion is reduced
+    9. NS (Nonce Sum): Used for protection against accidental concealment of packet loss "Protection data is correclty receuved"
+
+        3 way handshake
+
+        SYN sends a SYN packet to the server. packet contains an initial sequence no client chooses ie 100
+
+        SYN-ACK  server receives the SYN packet  responds with a SYN-ACK packet
+            Packet contain acknowledgment number .the client's sequence number plus one  101, sequence number that the server choose. ie Hello weceived your message no 100,  hello my message will be no 200
+
+        ACK client receives the SYN-ACK %  send ACK packet back which is erver's sequence number plus one 201 .ie client saying received your message no 200, let's start talking.
+
+        Client: SYN (Seq=1000) →
+        Server: SYN-ACK (Ack=101, Seq=200) →
+        Client: ACK (Ack=201)
+
+    After this exchange, the connection is established,
+
+    Port closed means the port not accepting any connection but their is a service running on it
+
+    Filtered either packet filtering or firewall is setup
+        ssh then http are most intering one
+
+        FOrmat of nmap output; xml, grippable, normal nmap which is human readable
+        output all -oA, xml oX, greppable oG, normal oN
+        ie nmap -sS 192.168.1.1 -oA nmap_stealth
+        the output will gnmap, nmap ,xml
+
+    Verbosity refers to the level of detail provided in output messages, logs
+        Three levels    level 1 gives scan progress
+                        level 2 gives info of packets and network, ie ARP responses
+                        level 3 info about scan
+    First level given by single v ie nmap sS -v, nmap sS -vv, nmap sS -vvv
+
+
+    nmap -d scanme.nmap.org: This command will enable debugging output for the scan 
+        Adding more -d flags (e.g., -dd, -ddd) increases the amount of debugging information.
+
+
+    Inverse TCP flags scanning FIN,XMAS,NULL do not have TCP 3way handshake
+        most IDS are build to detect SYN or even TCP scan hence need for these
+
+        FIN senc scan with FIN TCP header
+        XMAS sends FIN, URG and PSH all together
+        NULL not sending any scan
+
+        If you do not get a response ,the port is open but if you get a response it is closed.youll get a RST
+
+        XMAS syntax
+        nmap -sX 192.1.1.1
+
+        FIN
+        nmap -sF 192.1.1.1
+
+        Null scan
+        -sN TCP Null scan.
+        nmap reason option analyse results you are un sure of or you want to evade IDS
+            nmap -sN 192.1.1.1 --reason
+
+        Timing templates are used to run scan faster or slower. range from T0 to T5. T5 is the fastest. T1 mostly used to evade IDS and rate limiting ,T2 not used as much
+        T3 is the default nmap scan,T4 most used to speed the scan T5 used in network that can withstand.
+        T0 Paranoid, T1/Sneaky,T2 Polite, T3 Normal, T4 Aggressive, T5 Insane
+            i.e nmap -sS -P21-80 T1 nmap.scanme.org
+             
+        Parallelism - parell operation/sessions than run during the scan. Max set to lower value, Min set max value
+            nmap -sS -p21-443 --min-parellelism 10 nmap.scan 
+
+            increse speed of scan ie 50, results can be unreliable as compared to 10
+
+            max scan useful in IDS .Good for evasion
+            nmap -sS -p21-443 --max-parellelism 1 nmap.scan  takes little time
+            nmap -sS -p21-443 --max-parellelism 1 nmap.scan takes most time
+
+            If not sure, do not specify parellilism
+
+        Host group sizes allow one to specifiy host group to scan at once/simultenously
+
+            Aggresive scan can lead to in accurate results since we are changing a lot of default results
+            nmap -sS -F --min-hostgroup 30 192.1.1.1/24
+
+        Host timeout. No of time to elapse before sking the host
+            specify timeout period whereby if host do not respond,you skip
+
+        Scan delay allow to pause nmap for specific amount of time
+
+        Packet rate
+            Specify min packet rate to be sent per second
+                nmap -sS --min-rate 20 nmap.scanme.org
+
+        Faster and aggressive scan affect the result you get
+        Netwok/device cannot handle much traffic you can use timming trmplate & parallelism
+
+    Network Address Translation (NAT)
+        default 
+        The VM gets an IP address from a virtual network When the VM tries to access the internet, VirtualBox translates the VM’s IP address to the host machine’s IP address and then returns the response back to the VM, translating the address back.
+            LImitation
+                limited port forwdaing
+
+    You don’t need other devices to access your VM
+
+    Bridged Networking 
+            connects your VM to the same network as your host machine, 
+            Advantage
+                full network access
+                no port forwading
+            limitation
+                ssecurity
+                
+        You need the VM to communicate with other devices on your network
+        You’re running services on the VM that need to be accessible from other network devices.
+
+
+
+        NSE allow users to write script and automate scans
+             ls -al /usr/share/nmap/scripts/
+             ls -al /usr/share/nmap/scripts/ | grep -e "http-enum" does enumeration in web server
+             vim /usr/share/nmap/scripts/http-enum.nse  if you want to make changes
+
+        Identify script to run
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             
