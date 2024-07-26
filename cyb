@@ -1019,7 +1019,7 @@ TCP flags = signals used during call ie hello, bye
                 no port forwading
             limitation
                 ssecurity
-                
+
         You need the VM to communicate with other devices on your network
         You’re running services on the VM that need to be accessible from other network devices.
 
@@ -1032,33 +1032,183 @@ TCP flags = signals used during call ie hello, bye
 
         Identify script to run
 
+        DNS Enumeration port 53
+
+            ls -al /usr/share/nmap/scripts/ | grep -e "dns-" 
+
+        script argument allow to provide argument to run for particular script
+        Not work in modern since its brute force
+        nmap --script dns-zone-transfer --script-args dns-zone-transfer.server=nsztm1.digi.ninja,dns-zone-transfer.port=53,dns-zone-transfer.domain=zonetransfer.me zonetransfer.me
+
+        Meta
+            nmap --script dns-zone-transfer --script-args dns-zone-transfer.server=nsztm1.digi.ninja,dns-zone-transfer.port=53,dns-zone-transfer.domain=zonetransfer.me 192.168.100.193
+
+            Breakdown
+                nmap: This is the command to run Nmap,
+
+                --script dns-zone-transfer: This specifies that you want to use the dns-zone-transfer script. Nmap has a powerful scripting engine (NSE) that allows users to run custom scripts for more advanced scanning tasks. The dns-zone-transfer script attempts to perform a DNS zone transfer.
+                    available under ls -al /usr/share/nmap/scripts/ | grep -e "dns-" 
+
+                --script-args: This option is used to provide arguments to the script you are running. In this case, you are passing arguments to the dns-zone-transfer script.
+
+                dns-zone-transfer.server=nsztm1.digi.ninja: This specifies the DNS server that you want to query for the zone transfer. 
+
+                dns-zone-transfer.port=53: This specifies the port number to connect to on the DNS server. Port 53 is the standard port for DNS services.
+
+                dns-zone-transfer.domain=zonetransfer.me: This specifies the domain for which you are attempting to perform the zone transfer. The domain zonetransfer.me is the domain whose DNS zone information you want to retrieve.
+
+                192.168.100.193: This is the target IP address where you want to perform the scan. In this case, you are telling Nmap to attempt the DNS zone transfer against the DNS server at 192.168.100.193.
+
+        STMP Enumeration runs on port 25, but can be configured to another port
+            Protocol for sending emails
+            IMAP for receiving emails
+
+             ls -al /usr/share/nmap/scripts/ | grep -e "smtp"
+
+        List commands
+             nmap -p25 --script smtp-commands 192.168.100.193
+
+        Enumearate users
+
+           nmap -Pn -p25 --script smtp-enum-users --script-args smtp-enum-users.methods={vrfy} 192.18.100.193
+
+        Test if there is an open relay available and we can send email
+
+            nmap -p25 --script smtp-open-relay 192.168.100.193
 
 
+           Vulnerability scan .check is vulnerable to any
 
+                nmap -p25 --script smtp-vuln-cve2011-1764 192.168.100.193
 
+                if dealing a target potential vulnerable, and you know the cve code related to that vulnerabity you can scan to test if it is
 
+        HTTP Enumeration port 80
+            list 
+                ls -al /usr/share/nmap/scripts/ | grep -e "http"
 
+                waf-detect detects firewall
+                waf-fingerprint detects web app firewall use
 
+                    nmap -Pn -sV -p 80 -T4 --script http-methods --script-args http-methods.test=all nmap.scanme.org
+        METHODS
 
+                http methods also known as HTTP verbs, are a set of request methods supported by HTTP 
+                GET, Retrieve data from a server at the specified resource
+                    Idempotent: Yes Safe: Yes
+                POST, Send data to the server to create or update a resource
+                    Idempotent: No Safe: No
+                PUT, Update or create a resource at the specified URL.
+                    Idempotent: Yes Safe: No
+                DELETE,Delete the specified resource.
+                    Idempotent: Yes Safe: No
+                HEAD, imilar to GET but only retrieves the headers of the response, not the body
+                    Idempotent: Yes Safe: Yes
+                OPTIONS Describe the communication options for the target resource.
+                    Idempotent: Yes Safe: Yes
+                PATCH Apply partial modifications to a resource.
+                     Idempotent: No Safe: No
+                TRACE Echo back the received request, used for debugging
+                    Idempotent: Yes Safe: Yes
 
+                    Idempotent vs. Safe
 
+                    Idempotent Methods: Methods that can be called many times without different outcomes. For example, calling GET or PUT multiple times will have the same effect as calling it once.
 
+                    Safe Methods: Methods that do not modify resources and are intended for information retrieval only, like GET and HEAD.
 
-
-
-
-
-
-
-
-
-
-
+        Finding hidden files & directories
+            i.e nmap -F -sV 80 --script http-enum 192.168.100.193
 
             
+        WAF Detection & Fingerprinting
+            tells if web has firewall and also can fingerprint the firewall and tell if blocked or filtered and do fingerprinting where is knowing the service blocking
+            Web security firewall. cloudflare
+
+            ls -al /usr/share/nmap/scripts/ | grep -e "http-waf"
+
+                waf detect web app firewall send response in particular way and say if there is firewall
+
+                nmap -Pn -p 443 --script http-waf-detect estilo-ai.io
+
+                http-waf-fingerprint
+                port 443 is https
+
+                nmap -p 443 --script http-waf-detect,http-waf-fingerprint estilo-ai.io
+
+        SMB port 445
+            used for providing shared access to files, printers, and serial ports between nodes on a network
+            Server message block. communication of comps btn computers
+
+            Protocol: SMB is a network file sharing protocol allowing applications to read and write to files and request services from server programs in a computer network
+
+            ls -al /usr/share/nmap/scripts/ | grep -e "smb"
+
+                double-pulsar-backdoor scan system if is vulnerable to that
+                 remote code execution
+
+                 smb-vuln-ms17-010. tells if users are vulnerable
+
+                 nmap -p 445 --script smb-vuln-ms17-010 192.168.100.193
 
 
 
+            nmap -p 445 --script smb-os-discovery 192.168.100.193
+
+            nmap -p 445 --script smb-enum-shares 192.168.100.193 list all shares active in the target and tell permission if we can access them remotely or directly with or withoit credential
+
+            Detect version of smb that is running
+            nmap -p 445 --script smb-protocols 192.168.100.193 
+
+        MySQL ENUMERATION PORT 3306
+            always 3306 not like the others where you can change SMPT
+
+            ls -al /usr/share/nmap/scripts/ | grep -e "mysql"
+
+            nmap -p 3306 --script mysql-info 192.168.100.193
+                t   ells about info
+
+            nmap -p 3306 --script mysql-enum 192.168.100.193
+                Enumerate user or valid user account by brute force.Not good way to do brute force
+
+            nmap -p 3306 --script mysql-empty-password 192.168.100.193
+                Check to see if mysql account have null or no password so as to get in anonymus
+
+            Vulnerability scanning
+                 ls -al /usr/share/nmap/scripts/ | grep -e "vulners"
+
+                 nmap -sV -p21-8080 --script vuners 192.1.1.1
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+               
 
 
 
