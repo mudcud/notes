@@ -442,6 +442,10 @@ CLient side attack
    and Maltego
   
 whois lookup - find about the owner of the website https://whois.domaintools.com/amerix.co.ke
+
+ nslookup <website> 
+ nmap amerix.co.ke  
+
 netcraaft site report - shows technology used on the website  https://www.netcraft.com/tools/
 robtex DNS Lookup- show comprehensive info about the target https://www.robtex.com/
 
@@ -465,18 +469,130 @@ discovering sensitive files man dirb
     reflected. excecuted when a partucular url is executed
     DOM based. run without communication with web server unlike the two attacks above
     
+  Nmap
 
-PORT filtered, means nmap can't know if the port is open or closed.Stay away 
-netmask, max range of ip
-oG grippable output 
-vv double verbose give information about the scan
-  save nmap -oG - 192.168.100.0-255 -vv >/home/rulz/Desktop/Results
-specific port hack 
-  nmap -oG - 192.168.100.0-255 -p 23 -vv >/home/rulz/Desktop/Resultsy.txt
-A - aggresive scan
-sV service version. versin or OS ,or ip ranges being used. ie to know if vulnerabilities were in ubuntu 2.0. also line attack for the specific version
--F fast and given most targeted port. will give 100 ports unlike the default 1000 ports
-T time for performance. not a big deal
+    UDP just send if icmp is unreachable or not if reachable, there will be no response. Can't know if is port is open or closed
+
+    └─$ nmap -sU 192.168.1.1/24
+    U udp
+
+
+    PORT filtered, means nmap can't know if the port is open or closed.Stay away 
+
+    netmask, max range of ip
+        oG grippable output 
+        vv double verbose give information about the scan
+          save nmap -oG - 192.168.100.0-255 -vv >/home/rulz/Desktop/Results
+        specific port hack 
+          nmap -oG - 192.168.100.0-255 -p 23 -vv >/home/rulz/Desktop/Resultsy.txt
+         A - aggresive scan = ggressive scan, which includes OS detection, version detection, script scanning, and traceroute.
+
+         -sV service version. versin or OS ,or ip ranges being used. ie to know if  vulnerabilities were in ubuntu 2.0. also line attack for the specific version
+         -F fast and given most targeted port. will give 100 ports unlike the default 1000 ports
+         T time for performance. not a big deal
+         sS stealth scan
+         sT connect scan
+         -sA (ACK Scan)  = detecting Firewalls:
+          sends ACK and receive RST If open via wireshark analysis
+           best to do port by port. When filter on nmap will say filtered
+
+              └─$ nmap  -sA 192.168.100.101
+
+            Host discovering ; know device on my network
+
+              └─$ nmap -sn 192.168.1.1/24
+
+              check hosts only not ports mainly send icmp to say if it up or not help using 0  man nmap | grep sn
+              Admin mostl/fire wall block icmp echo requests
+              if icmp requests are being block Pn will treat all hosts as online and skip host discovery and thus will not ping but do host discovery
+
+              └─$ nmap -Pn 192.168.1.1/24
+              └─$ nmap -sp ping scan
+
+              Operating system scan
+              └─$ nmap  -O 192.168.100.101
+
+              p means ports 65k ports available
+
+              combining OS and service version and come up with particular exploit
+              └─$ nmap  -O -sV 192.168.100.101
+
+              aggresive scanning 
+              └─$ nmap  -A 192.168.100.101 -p xxx.xxx.xx.xx   scanning particular port
+               └─$nmap  -A 192.168.100.101 -p-   scanning pall port
+
+               nmap -sT establishes 3 way handshake on each port, not used mostly
+                slow and easy to be detected
+
+          Stealth scan
+
+            Scan but cut it short befor it complete
+            attackers to probe a target system hile attempting to avoid detection by security systems like firewalls and IDS
+            common stealth scan techniques include the SYN scan, FIN scan, XMAS scan, and NULL scan.
+
+            SYN Scan (Half-Open Scan)
+            By not completing the handshake, the attacker can gather information without logging a full connection. save time also
+
+             - attacker sends a SYN
+             - If the port is open, the target responds with a SYN-ACK packet. If the port is closed, the target responds with an RST packet.
+             -Instead of completing the three-way handshake, the attacker sends an RST packet to tear down the connection.
+
+             └─$ nmap -sS 192.168.1.1/24 Best way to do
+
+             Evading firewall
+
+             Decoy
+
+                Decoy - making your scan seem to come from another ip address  in addition to your own IP address.
+                D for decoy,   F fast scan only the most common 100 ports instead of the default 1000. 
+                D RND:3: This option uses decoys to obscure the source of the scan makes it harder for the target to determine which IP address is actually performing the scan .RND:3 means Nmap will use 3 random decoys
+
+                RND generate random IP
+                Local network is best to know the device to use as decoy
+
+                nmap -sS -sV -F -D 10.10.1.1, 10.1.1.1 use it sequentially
+                nmap -sS -sV -F -D 10.10.1.1 nmap.scanme.org
+
+                pattern will be recurrin
+                
+                nmap -sS -sV -F -D RND:3 nmap.scanme.org
+
+              Packet fragmentation 
+                breaking packets and its content to smaller units and when reach target they ebuild. current IDS can rebuild and detect
+
+            ftp-anon is a script to determine if you can perfom anonymous login to ftp port
+            to use,is better to speficy the port no the service is running on
+
+     
+            └─# nmap -p 21 --script ftp-anon 192.168.100.193
+                output _ftp-anon: Anonymous FTP login allowed (FTP code 230)
+                to run many scripts use comma
+
+
+              └─# nmap -p 21 --script ftp-anon,ftp-vsftpd-backdoor 192.168.100.193
+              to run all ftp ports instead of specifying, we use wilcard symbol, also  can be done for http etc
+
+              └─# nmap -p 21 --script "ftp-*" 192.168.100.193
+              very noisy in network,so use evation like scan timining etc so not to notify IDS 
+
+
+
+
+
+
+
+
+
+
+
+
+
+               
+
+
+
+
+
 
 
 
