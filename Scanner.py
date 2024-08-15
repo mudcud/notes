@@ -1,35 +1,55 @@
-#!/usr/bin/python3
-
 import nmap
 
-scanner = nmap.PortScanner()
 
-print("Welcome, this is a simple nmap automation tool")
-print("<----------------------------------------------------->")
+def main():
+    scanner = nmap.PortScanner()
 
-ip_addr = input("Please enter the IP address you want to scan: ")
-print("The IP you entered is: ", ip_addr)
-type(ip_addr)
+    print("Welcome, this is a simple nmap automation tool")
+    print("<----------------------------------------------------->")
 
-resp = input("""\nPlease enter the type of scan you want to run
-                1)SYN ACK Scan
-                2)UDP Scan
-                3)Comprehensive Scan \n""")
-print("You have selected option: ", resp)
-resp_dict={'1':['-v -sS','tcp'],'2':['-v -sU','udp'],'3':['-v -sS -sV -sC -A -O','tcp']}
-if resp not in resp_dict.keys():
-    print("enter a valid option")
-else:
-    print("nmap version: ",scanner.nmap_version())
-    scanner.scan(ip_addr,"1-1024",resp_dict[resp][0]) #the # are port range to scan, the last part is the scan type
-    print(scanner.scaninfo())
-    if scanner.scaninfo()=='up':
-        print("Scanner Status: ",scanner[ip_addr].state())
-        print(scanner[ip_addr].all_protocols())
-        print("Open Ports: ",scanner[ip_addr][resp_dict[resp][1]].keys())  #display all open ports
+    # Get target IP address from user
+    target = input("Please enter the target IP address or hostname: ")
 
+    # Get scan type from user
+    print("Select the type of scan you want to perform:")
+    print("1. TCP SYN Scan (default)")
+    print("2. TCP Connect Scan")
+    print("3. Service Version Detection")
+    print("4. OS Detection")
+    print("5. Vulnerability Scan")
+    scan_type = input("Enter the number of the scan type (1/2/3/4/5): ")
 
+    # Perform the selected scan
+    try:
+        if scan_type == '1':
+            print("Performing TCP SYN Scan...")
+            scanner.scan(target, arguments='-sS -p-')
+        elif scan_type == '2':
+            print("Performing TCP Connect Scan...")
+            scanner.scan(target, arguments='-sT -p-')
+        elif scan_type == '3':
+            print("Performing Service Version Detection...")
+            scanner.scan(target, arguments='-sV -p-')
+        elif scan_type == '4':
+            print("Performing OS Detection...")
+            scanner.scan(target, arguments='-O -p-')
+        elif scan_type == '5':
+            print("Performing Vulnerability Scan...")
+            scanner.scan(target, arguments=f"--script vuln -p-")
+        else:
+            print("Invalid selection. Please choose 1, 2, 3, 4, or 5.")
+            return
 
+        # Display the scan results
+        print("<----------------------------------------------------->")
+        print(f"Scan results for {target}:")
+        if target in scanner.all_hosts():
+            print(scanner[target])
+        else:
+            print("No scan results found.")
 
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-
+if __name__ == "__main__":
+    main()

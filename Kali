@@ -57,3 +57,23 @@ delgroup        Removes a group from the system
 /usr        Contains executables, libraries, man files, etc.
 
 /var        This directory contains variable data files such as log files, email in-boxes, web application-related files, cron files, and more.
+
+
+        grep is a command-line utility in Unix and Unix-like operating systems used to search for specific patterns within text files
+
+            Some common options for grep include:
+
+                -i: Ignore case distinctions in both the pattern and the file.
+                -r or -R: Recursively search directories.
+                -l: Print only the names of files with matching lines.
+                -n: Print line numbers with output lines.
+                -v: Invert the match, printing only lines that do not match the pattern.
+                -e: Specify multiple patterns.
+
+            h is human readable
+            cd change directory
+            R recursively remove
+
+            Hidden file ls -a
+            directory ls -l, ls -lh
+            files and directories ls -al

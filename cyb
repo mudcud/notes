@@ -1179,6 +1179,38 @@ TCP flags = signals used during call ie hello, bye
 
                  nmap -sV -p21-8080 --script vuners 192.1.1.1
 
+        "Fingerprinting" refers to the process of identifying details about a remote system by analyzing its responses to specific network probes
+
+        sS SYN scan, half-open scan or stealth you do not send 3 way handshake SYN, SYN,ACK then RST. are you there, yes. reset
+        Full scan for three way sT TCP connect scan
+        sA = ack scan
+
+        ARP means I have the IP address but I do not have the mac address.
+            When scanning, mac address is important more so if it's in my local environment, I have to put that mac address as destination mac address in the ethernet header (wireshark) so that my switch can send traffic to other device. thats why mac address in in data link layer is important
+
+            Nmap is ARP heavy layer 2. Scanning and see mac address of devices around. we do not have to cross a router. If you are crossing a router, you need router mac only since it sends packets from their to next sub net
+
+            If you want to ping ICMP to a network that is not local to you, use sudo
+            Native without sudo, you'll get basic without ICMP
+            RRs Resource Resource record
+
+            TCP sS SYN with window value 1024, that's Nmap. Window: 1024
+            Full scan takes a lot of time, specify which port to scan
+
+            When acknowledgment number is available and no flag thats red flag,should only have zero AC
+
+            No legitimate SYN without MSs maximum segment size
+
+            Banner : Service banners are pieces of information that services often provide when a connection is established
+
+            nmap --script "banner" 192.1.1.1  
+            ssl scrips
+                 nmap --script "ssl-enum-ciphers" nmap.org -p 443 
+                    very noisy,one can use timing template
+
+
+
+
 
 
 

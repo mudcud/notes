@@ -507,7 +507,7 @@ discovering sensitive files man dirb
               if icmp requests are being block Pn will treat all hosts as online and skip host discovery and thus will not ping but do host discovery
 
               └─$ nmap -Pn 192.168.1.1/24
-              └─$ nmap -sp ping scan
+              └─$ nmap -sn ping scan formaly sp
 
               Operating system scan
               └─$ nmap  -O 192.168.100.101
@@ -560,8 +560,12 @@ discovering sensitive files man dirb
               Packet fragmentation 
                 breaking packets and its content to smaller units and when reach target they ebuild. current IDS can rebuild and detect
 
+              ftp-syst.nse show system info 
+
             ftp-anon is a script to determine if you can perfom anonymous login to ftp port
             to use,is better to speficy the port no the service is running on
+
+            ftp-brute used for brute forcing, not recommended use utiliy ie hydra
 
      
             └─# nmap -p 21 --script ftp-anon 192.168.100.193
@@ -574,6 +578,27 @@ discovering sensitive files man dirb
 
               └─# nmap -p 21 --script "ftp-*" 192.168.100.193
               very noisy in network,so use evation like scan timining etc so not to notify IDS 
+
+            Banner grabbing
+              Identifyingservice version that's running on a port
+
+               nmap -p20,80 --script banner 1.1.1.2
+               full scan nmap -F -T4 --script banner 1.1.1.2
+
+               SYN send connection
+               SYN,ACK  connection established
+               RST ,ACK close connection. ie I do not want it keep it open, close it
+
+               Nmap calls filtered since we did not receive a reset RST or ACK back. Possible filtered by firewall
+               Closed, sends a SYN, then receives RST,ACK 
+
+               scanning all ports ie 65k can lead to be detected
+
+
+
+               
+
+
 
 
 

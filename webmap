@@ -17,3 +17,22 @@
 
 
                 sudo python3 Scanner.py
+
+                        use different name at each instance
+                                Option 2: Use a different name
+                        If you prefer not to remove the existing container, you can run the new container with a different name:
+
+
+                        sudo docker run -d \
+                        --name webmap2 \
+                        -h webmap \
+                        -p 8000:8000 \
+                        -v /tmp/webmap:/opt/xml \
+                        reborntc/webmap
+
+
+
+        To generate a new token for your WebMap container, you can use the following command:
+
+
+                        sudo docker exec -ti webmap2 /root/token
